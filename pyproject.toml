@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 name = "ga4gh-phenopacket-core"
 requires-python = ">=3.8"
 description = "Python convenience wrappers for Phenopacket Schema"
-readme = "README.md"
+readme = "README.rst"
 authors = [
     {name = "Daniel Danis", email="daniel.gordon.danis@protonmail.com"},
     {name = "Peter Robinson", email="peter.robinson@bih-charite.de"},
