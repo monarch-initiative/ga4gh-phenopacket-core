@@ -3,7 +3,7 @@ name: Deploy documentation to GitHub Pages
 on:
   workflow_dispatch:
   push:
-    branches: [ main, develop ]
+    branches: [ main, development ]
 
 jobs:
   build-docs:
@@ -57,7 +57,7 @@ jobs:
         # We store the docs for `main` in `stable` dir
         build_docs main stable
         # We store the docs for `development` in `latest` dir
-        build_docs develop latest
+        build_docs development latest
 
 
     - name: Deploy documentation
