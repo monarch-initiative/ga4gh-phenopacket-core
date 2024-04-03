@@ -12,7 +12,7 @@ Examples
 
 We recommend importing all classes using the start import:
 
-.. doctest::
+.. code-block:: python
 
   >>> from ppsc.v202 import *
 
@@ -22,13 +22,13 @@ Create a Phenopacket Schema element
 The library simplifies creation of the Phenopacket Schema elements:
 
 
-.. doctest::
+.. code-block:: python
 
   >>> subject = Individual(id='retinoblastoma', sex=Sex.FEMALE)
 
 The objects can be modified in place:
 
-.. doctest::
+.. code-block:: python
 
   >>> subject.sex = Sex.MALE
   >>> subject.sex.name
