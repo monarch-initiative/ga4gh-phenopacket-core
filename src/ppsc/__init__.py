@@ -121,7 +121,7 @@ We can write the subject into the buffer and get the same data back:
 True
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1dev0"
 
 from . import parse
 from . import v202
