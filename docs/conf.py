@@ -41,7 +41,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'ppsc'
+project = u'GA4GH Phenopacket Core'
 copyright = u'2024'
 author = u'Daniel Danis, Peter N Robinson'
 
