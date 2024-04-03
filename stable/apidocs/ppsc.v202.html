@@ -24,8 +24,7 @@
         <script src="../_static/copybutton.js?v=6dbb43f8"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="ppsc.parse.json package" href="ppsc.parse.json.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,25 +49,918 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Installation &amp; Tutorial</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../setup.html">Setup</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API reference</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="ppsc.html">ppsc package</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="ppsc.html#create-phenopacket-programatically">Create phenopacket programatically</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ppsc.html#read-write-json-and-protobuf">Read/write JSON and Protobuf</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ppsc.html#ppsc.Timestamp"><code class="docutils literal notranslate"><span class="pre">Timestamp</span></code></a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="ppsc.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="ppsc.parse.html">ppsc.parse package</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">ppsc.v202 package</a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">ppsc.v202 package</a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket"><code class="docutils literal notranslate"><span class="pre">Phenopacket</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.id"><code class="docutils literal notranslate"><span class="pre">Phenopacket.id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.subject"><code class="docutils literal notranslate"><span class="pre">Phenopacket.subject</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.phenotypic_features"><code class="docutils literal notranslate"><span class="pre">Phenopacket.phenotypic_features</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.measurements"><code class="docutils literal notranslate"><span class="pre">Phenopacket.measurements</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.biosamples"><code class="docutils literal notranslate"><span class="pre">Phenopacket.biosamples</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.interpretations"><code class="docutils literal notranslate"><span class="pre">Phenopacket.interpretations</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.diseases"><code class="docutils literal notranslate"><span class="pre">Phenopacket.diseases</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.medical_actions"><code class="docutils literal notranslate"><span class="pre">Phenopacket.medical_actions</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.files"><code class="docutils literal notranslate"><span class="pre">Phenopacket.files</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.meta_data"><code class="docutils literal notranslate"><span class="pre">Phenopacket.meta_data</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.field_names"><code class="docutils literal notranslate"><span class="pre">Phenopacket.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.required_fields"><code class="docutils literal notranslate"><span class="pre">Phenopacket.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.from_dict"><code class="docutils literal notranslate"><span class="pre">Phenopacket.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.to_message"><code class="docutils literal notranslate"><span class="pre">Phenopacket.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.message_type"><code class="docutils literal notranslate"><span class="pre">Phenopacket.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Phenopacket.from_message"><code class="docutils literal notranslate"><span class="pre">Phenopacket.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Individual"><code class="docutils literal notranslate"><span class="pre">Individual</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Individual.id"><code class="docutils literal notranslate"><span class="pre">Individual.id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Individual.alternate_ids"><code class="docutils literal notranslate"><span class="pre">Individual.alternate_ids</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Individual.date_of_birth"><code class="docutils literal notranslate"><span class="pre">Individual.date_of_birth</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Individual.time_at_last_encounter"><code class="docutils literal notranslate"><span class="pre">Individual.time_at_last_encounter</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Individual.vital_status"><code class="docutils literal notranslate"><span class="pre">Individual.vital_status</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Individual.sex"><code class="docutils literal notranslate"><span class="pre">Individual.sex</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Individual.karyotypic_sex"><code class="docutils literal notranslate"><span class="pre">Individual.karyotypic_sex</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Individual.gender"><code class="docutils literal notranslate"><span class="pre">Individual.gender</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Individual.taxonomy"><code class="docutils literal notranslate"><span class="pre">Individual.taxonomy</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Individual.field_names"><code class="docutils literal notranslate"><span class="pre">Individual.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Individual.required_fields"><code class="docutils literal notranslate"><span class="pre">Individual.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Individual.from_dict"><code class="docutils literal notranslate"><span class="pre">Individual.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Individual.to_message"><code class="docutils literal notranslate"><span class="pre">Individual.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Individual.message_type"><code class="docutils literal notranslate"><span class="pre">Individual.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Individual.from_message"><code class="docutils literal notranslate"><span class="pre">Individual.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.VitalStatus"><code class="docutils literal notranslate"><span class="pre">VitalStatus</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.VitalStatus.Status"><code class="docutils literal notranslate"><span class="pre">VitalStatus.Status</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.VitalStatus.Status.UNKNOWN_STATUS"><code class="docutils literal notranslate"><span class="pre">VitalStatus.Status.UNKNOWN_STATUS</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VitalStatus.Status.ALIVE"><code class="docutils literal notranslate"><span class="pre">VitalStatus.Status.ALIVE</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VitalStatus.Status.DECEASED"><code class="docutils literal notranslate"><span class="pre">VitalStatus.Status.DECEASED</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.VitalStatus.status"><code class="docutils literal notranslate"><span class="pre">VitalStatus.status</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VitalStatus.time_of_death"><code class="docutils literal notranslate"><span class="pre">VitalStatus.time_of_death</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VitalStatus.cause_of_death"><code class="docutils literal notranslate"><span class="pre">VitalStatus.cause_of_death</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VitalStatus.survival_time_in_days"><code class="docutils literal notranslate"><span class="pre">VitalStatus.survival_time_in_days</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VitalStatus.field_names"><code class="docutils literal notranslate"><span class="pre">VitalStatus.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VitalStatus.required_fields"><code class="docutils literal notranslate"><span class="pre">VitalStatus.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VitalStatus.from_dict"><code class="docutils literal notranslate"><span class="pre">VitalStatus.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VitalStatus.to_message"><code class="docutils literal notranslate"><span class="pre">VitalStatus.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VitalStatus.message_type"><code class="docutils literal notranslate"><span class="pre">VitalStatus.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VitalStatus.from_message"><code class="docutils literal notranslate"><span class="pre">VitalStatus.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Sex"><code class="docutils literal notranslate"><span class="pre">Sex</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Sex.UNKNOWN_SEX"><code class="docutils literal notranslate"><span class="pre">Sex.UNKNOWN_SEX</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Sex.FEMALE"><code class="docutils literal notranslate"><span class="pre">Sex.FEMALE</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Sex.MALE"><code class="docutils literal notranslate"><span class="pre">Sex.MALE</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Sex.OTHER_SEX"><code class="docutils literal notranslate"><span class="pre">Sex.OTHER_SEX</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.KaryotypicSex"><code class="docutils literal notranslate"><span class="pre">KaryotypicSex</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.KaryotypicSex.UNKNOWN_KARYOTYPE"><code class="docutils literal notranslate"><span class="pre">KaryotypicSex.UNKNOWN_KARYOTYPE</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.KaryotypicSex.XX"><code class="docutils literal notranslate"><span class="pre">KaryotypicSex.XX</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.KaryotypicSex.XY"><code class="docutils literal notranslate"><span class="pre">KaryotypicSex.XY</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.KaryotypicSex.XO"><code class="docutils literal notranslate"><span class="pre">KaryotypicSex.XO</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.KaryotypicSex.XXY"><code class="docutils literal notranslate"><span class="pre">KaryotypicSex.XXY</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.KaryotypicSex.XXX"><code class="docutils literal notranslate"><span class="pre">KaryotypicSex.XXX</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.KaryotypicSex.XXYY"><code class="docutils literal notranslate"><span class="pre">KaryotypicSex.XXYY</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.KaryotypicSex.XXXY"><code class="docutils literal notranslate"><span class="pre">KaryotypicSex.XXXY</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.KaryotypicSex.XXXX"><code class="docutils literal notranslate"><span class="pre">KaryotypicSex.XXXX</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.KaryotypicSex.XYY"><code class="docutils literal notranslate"><span class="pre">KaryotypicSex.XYY</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.KaryotypicSex.OTHER_KARYOTYPE"><code class="docutils literal notranslate"><span class="pre">KaryotypicSex.OTHER_KARYOTYPE</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.GeneDescriptor"><code class="docutils literal notranslate"><span class="pre">GeneDescriptor</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.GeneDescriptor.value_id"><code class="docutils literal notranslate"><span class="pre">GeneDescriptor.value_id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GeneDescriptor.symbol"><code class="docutils literal notranslate"><span class="pre">GeneDescriptor.symbol</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GeneDescriptor.description"><code class="docutils literal notranslate"><span class="pre">GeneDescriptor.description</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GeneDescriptor.alternate_ids"><code class="docutils literal notranslate"><span class="pre">GeneDescriptor.alternate_ids</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GeneDescriptor.xrefs"><code class="docutils literal notranslate"><span class="pre">GeneDescriptor.xrefs</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GeneDescriptor.alternate_symbols"><code class="docutils literal notranslate"><span class="pre">GeneDescriptor.alternate_symbols</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GeneDescriptor.field_names"><code class="docutils literal notranslate"><span class="pre">GeneDescriptor.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GeneDescriptor.required_fields"><code class="docutils literal notranslate"><span class="pre">GeneDescriptor.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GeneDescriptor.from_dict"><code class="docutils literal notranslate"><span class="pre">GeneDescriptor.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GeneDescriptor.to_message"><code class="docutils literal notranslate"><span class="pre">GeneDescriptor.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GeneDescriptor.message_type"><code class="docutils literal notranslate"><span class="pre">GeneDescriptor.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GeneDescriptor.from_message"><code class="docutils literal notranslate"><span class="pre">GeneDescriptor.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.AcmgPathogenicityClassification"><code class="docutils literal notranslate"><span class="pre">AcmgPathogenicityClassification</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.AcmgPathogenicityClassification.NOT_PROVIDED"><code class="docutils literal notranslate"><span class="pre">AcmgPathogenicityClassification.NOT_PROVIDED</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.AcmgPathogenicityClassification.BENIGN"><code class="docutils literal notranslate"><span class="pre">AcmgPathogenicityClassification.BENIGN</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.AcmgPathogenicityClassification.LIKELY_BENIGN"><code class="docutils literal notranslate"><span class="pre">AcmgPathogenicityClassification.LIKELY_BENIGN</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.AcmgPathogenicityClassification.UNCERTAIN_SIGNIFICANCE"><code class="docutils literal notranslate"><span class="pre">AcmgPathogenicityClassification.UNCERTAIN_SIGNIFICANCE</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.AcmgPathogenicityClassification.LIKELY_PATHOGENIC"><code class="docutils literal notranslate"><span class="pre">AcmgPathogenicityClassification.LIKELY_PATHOGENIC</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.AcmgPathogenicityClassification.PATHOGENIC"><code class="docutils literal notranslate"><span class="pre">AcmgPathogenicityClassification.PATHOGENIC</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticActionability"><code class="docutils literal notranslate"><span class="pre">TherapeuticActionability</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticActionability.UNKNOWN_ACTIONABILITY"><code class="docutils literal notranslate"><span class="pre">TherapeuticActionability.UNKNOWN_ACTIONABILITY</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticActionability.NOT_ACTIONABLE"><code class="docutils literal notranslate"><span class="pre">TherapeuticActionability.NOT_ACTIONABLE</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticActionability.ACTIONABLE"><code class="docutils literal notranslate"><span class="pre">TherapeuticActionability.ACTIONABLE</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.VariantInterpretation"><code class="docutils literal notranslate"><span class="pre">VariantInterpretation</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.VariantInterpretation.acmg_pathogenicity_classification"><code class="docutils literal notranslate"><span class="pre">VariantInterpretation.acmg_pathogenicity_classification</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariantInterpretation.therapeutic_actionability"><code class="docutils literal notranslate"><span class="pre">VariantInterpretation.therapeutic_actionability</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariantInterpretation.variation_descriptor"><code class="docutils literal notranslate"><span class="pre">VariantInterpretation.variation_descriptor</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariantInterpretation.field_names"><code class="docutils literal notranslate"><span class="pre">VariantInterpretation.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariantInterpretation.required_fields"><code class="docutils literal notranslate"><span class="pre">VariantInterpretation.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariantInterpretation.from_dict"><code class="docutils literal notranslate"><span class="pre">VariantInterpretation.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariantInterpretation.to_message"><code class="docutils literal notranslate"><span class="pre">VariantInterpretation.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariantInterpretation.message_type"><code class="docutils literal notranslate"><span class="pre">VariantInterpretation.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariantInterpretation.from_message"><code class="docutils literal notranslate"><span class="pre">VariantInterpretation.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.InterpretationStatus"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.InterpretationStatus</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.InterpretationStatus.UNKNOWN_STATUS"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.InterpretationStatus.UNKNOWN_STATUS</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.InterpretationStatus.REJECTED"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.InterpretationStatus.REJECTED</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.InterpretationStatus.CANDIDATE"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.InterpretationStatus.CANDIDATE</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.InterpretationStatus.CONTRIBUTORY"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.InterpretationStatus.CONTRIBUTORY</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.InterpretationStatus.CAUSATIVE"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.InterpretationStatus.CAUSATIVE</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.subject_or_biosample_id"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.subject_or_biosample_id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.interpretation_status"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.interpretation_status</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.call"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.call</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.gene_descriptor"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.gene_descriptor</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.variant_interpretation"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.variant_interpretation</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.field_names"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.required_fields"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.from_dict"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.to_message"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.message_type"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GenomicInterpretation.from_message"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Diagnosis"><code class="docutils literal notranslate"><span class="pre">Diagnosis</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Diagnosis.disease"><code class="docutils literal notranslate"><span class="pre">Diagnosis.disease</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Diagnosis.genomic_interpretations"><code class="docutils literal notranslate"><span class="pre">Diagnosis.genomic_interpretations</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Diagnosis.field_names"><code class="docutils literal notranslate"><span class="pre">Diagnosis.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Diagnosis.required_fields"><code class="docutils literal notranslate"><span class="pre">Diagnosis.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Diagnosis.from_dict"><code class="docutils literal notranslate"><span class="pre">Diagnosis.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Diagnosis.to_message"><code class="docutils literal notranslate"><span class="pre">Diagnosis.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Diagnosis.message_type"><code class="docutils literal notranslate"><span class="pre">Diagnosis.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Diagnosis.from_message"><code class="docutils literal notranslate"><span class="pre">Diagnosis.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation"><code class="docutils literal notranslate"><span class="pre">Interpretation</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.ProgressStatus"><code class="docutils literal notranslate"><span class="pre">Interpretation.ProgressStatus</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.ProgressStatus.UNKNOWN_PROGRESS"><code class="docutils literal notranslate"><span class="pre">Interpretation.ProgressStatus.UNKNOWN_PROGRESS</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.ProgressStatus.IN_PROGRESS"><code class="docutils literal notranslate"><span class="pre">Interpretation.ProgressStatus.IN_PROGRESS</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.ProgressStatus.COMPLETED"><code class="docutils literal notranslate"><span class="pre">Interpretation.ProgressStatus.COMPLETED</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.ProgressStatus.SOLVED"><code class="docutils literal notranslate"><span class="pre">Interpretation.ProgressStatus.SOLVED</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.ProgressStatus.UNSOLVED"><code class="docutils literal notranslate"><span class="pre">Interpretation.ProgressStatus.UNSOLVED</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.id"><code class="docutils literal notranslate"><span class="pre">Interpretation.id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.progress_status"><code class="docutils literal notranslate"><span class="pre">Interpretation.progress_status</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.diagnosis"><code class="docutils literal notranslate"><span class="pre">Interpretation.diagnosis</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.summary"><code class="docutils literal notranslate"><span class="pre">Interpretation.summary</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.field_names"><code class="docutils literal notranslate"><span class="pre">Interpretation.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.required_fields"><code class="docutils literal notranslate"><span class="pre">Interpretation.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.from_dict"><code class="docutils literal notranslate"><span class="pre">Interpretation.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.to_message"><code class="docutils literal notranslate"><span class="pre">Interpretation.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.message_type"><code class="docutils literal notranslate"><span class="pre">Interpretation.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Interpretation.from_message"><code class="docutils literal notranslate"><span class="pre">Interpretation.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.ReferenceRange"><code class="docutils literal notranslate"><span class="pre">ReferenceRange</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.ReferenceRange.unit"><code class="docutils literal notranslate"><span class="pre">ReferenceRange.unit</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ReferenceRange.low"><code class="docutils literal notranslate"><span class="pre">ReferenceRange.low</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ReferenceRange.high"><code class="docutils literal notranslate"><span class="pre">ReferenceRange.high</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ReferenceRange.field_names"><code class="docutils literal notranslate"><span class="pre">ReferenceRange.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ReferenceRange.required_fields"><code class="docutils literal notranslate"><span class="pre">ReferenceRange.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ReferenceRange.from_dict"><code class="docutils literal notranslate"><span class="pre">ReferenceRange.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ReferenceRange.to_message"><code class="docutils literal notranslate"><span class="pre">ReferenceRange.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ReferenceRange.message_type"><code class="docutils literal notranslate"><span class="pre">ReferenceRange.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ReferenceRange.from_message"><code class="docutils literal notranslate"><span class="pre">ReferenceRange.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Quantity"><code class="docutils literal notranslate"><span class="pre">Quantity</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Quantity.unit"><code class="docutils literal notranslate"><span class="pre">Quantity.unit</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Quantity.value"><code class="docutils literal notranslate"><span class="pre">Quantity.value</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Quantity.reference_range"><code class="docutils literal notranslate"><span class="pre">Quantity.reference_range</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Quantity.field_names"><code class="docutils literal notranslate"><span class="pre">Quantity.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Quantity.required_fields"><code class="docutils literal notranslate"><span class="pre">Quantity.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Quantity.from_dict"><code class="docutils literal notranslate"><span class="pre">Quantity.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Quantity.message_type"><code class="docutils literal notranslate"><span class="pre">Quantity.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Quantity.from_message"><code class="docutils literal notranslate"><span class="pre">Quantity.from_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Quantity.to_message"><code class="docutils literal notranslate"><span class="pre">Quantity.to_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.TypedQuantity"><code class="docutils literal notranslate"><span class="pre">TypedQuantity</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.TypedQuantity.type"><code class="docutils literal notranslate"><span class="pre">TypedQuantity.type</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TypedQuantity.quantity"><code class="docutils literal notranslate"><span class="pre">TypedQuantity.quantity</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TypedQuantity.field_names"><code class="docutils literal notranslate"><span class="pre">TypedQuantity.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TypedQuantity.required_fields"><code class="docutils literal notranslate"><span class="pre">TypedQuantity.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TypedQuantity.from_dict"><code class="docutils literal notranslate"><span class="pre">TypedQuantity.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TypedQuantity.to_message"><code class="docutils literal notranslate"><span class="pre">TypedQuantity.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TypedQuantity.message_type"><code class="docutils literal notranslate"><span class="pre">TypedQuantity.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TypedQuantity.from_message"><code class="docutils literal notranslate"><span class="pre">TypedQuantity.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.ComplexValue"><code class="docutils literal notranslate"><span class="pre">ComplexValue</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.ComplexValue.typed_quantities"><code class="docutils literal notranslate"><span class="pre">ComplexValue.typed_quantities</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ComplexValue.field_names"><code class="docutils literal notranslate"><span class="pre">ComplexValue.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ComplexValue.required_fields"><code class="docutils literal notranslate"><span class="pre">ComplexValue.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ComplexValue.from_dict"><code class="docutils literal notranslate"><span class="pre">ComplexValue.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ComplexValue.message_type"><code class="docutils literal notranslate"><span class="pre">ComplexValue.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ComplexValue.from_message"><code class="docutils literal notranslate"><span class="pre">ComplexValue.from_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ComplexValue.to_message"><code class="docutils literal notranslate"><span class="pre">ComplexValue.to_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Value"><code class="docutils literal notranslate"><span class="pre">Value</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Value.value"><code class="docutils literal notranslate"><span class="pre">Value.value</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Value.quantity"><code class="docutils literal notranslate"><span class="pre">Value.quantity</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Value.ontology_class"><code class="docutils literal notranslate"><span class="pre">Value.ontology_class</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Value.field_names"><code class="docutils literal notranslate"><span class="pre">Value.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Value.required_fields"><code class="docutils literal notranslate"><span class="pre">Value.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Value.from_dict"><code class="docutils literal notranslate"><span class="pre">Value.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Value.to_message"><code class="docutils literal notranslate"><span class="pre">Value.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Value.message_type"><code class="docutils literal notranslate"><span class="pre">Value.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Value.from_message"><code class="docutils literal notranslate"><span class="pre">Value.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Measurement"><code class="docutils literal notranslate"><span class="pre">Measurement</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Measurement.assay"><code class="docutils literal notranslate"><span class="pre">Measurement.assay</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Measurement.measurement_value"><code class="docutils literal notranslate"><span class="pre">Measurement.measurement_value</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Measurement.value"><code class="docutils literal notranslate"><span class="pre">Measurement.value</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Measurement.complex_value"><code class="docutils literal notranslate"><span class="pre">Measurement.complex_value</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Measurement.description"><code class="docutils literal notranslate"><span class="pre">Measurement.description</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Measurement.time_observed"><code class="docutils literal notranslate"><span class="pre">Measurement.time_observed</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Measurement.procedure"><code class="docutils literal notranslate"><span class="pre">Measurement.procedure</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Measurement.field_names"><code class="docutils literal notranslate"><span class="pre">Measurement.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Measurement.required_fields"><code class="docutils literal notranslate"><span class="pre">Measurement.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Measurement.from_dict"><code class="docutils literal notranslate"><span class="pre">Measurement.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Measurement.to_message"><code class="docutils literal notranslate"><span class="pre">Measurement.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Measurement.message_type"><code class="docutils literal notranslate"><span class="pre">Measurement.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Measurement.from_message"><code class="docutils literal notranslate"><span class="pre">Measurement.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.RegimenStatus"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.RegimenStatus</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.RegimenStatus.UNKNOWN_STATUS"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.RegimenStatus.UNKNOWN_STATUS</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.RegimenStatus.STARTED"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.RegimenStatus.STARTED</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.RegimenStatus.COMPLETED"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.RegimenStatus.COMPLETED</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.RegimenStatus.DISCONTINUED"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.RegimenStatus.DISCONTINUED</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.identifier"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.identifier</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.external_reference"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.external_reference</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.ontology_class"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.ontology_class</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.regimen_status"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.regimen_status</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.start_time"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.start_time</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.end_time"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.end_time</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.field_names"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.required_fields"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.from_dict"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.to_message"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.message_type"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TherapeuticRegimen.from_message"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.RadiationTherapy"><code class="docutils literal notranslate"><span class="pre">RadiationTherapy</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.RadiationTherapy.modality"><code class="docutils literal notranslate"><span class="pre">RadiationTherapy.modality</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RadiationTherapy.body_site"><code class="docutils literal notranslate"><span class="pre">RadiationTherapy.body_site</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RadiationTherapy.dosage"><code class="docutils literal notranslate"><span class="pre">RadiationTherapy.dosage</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RadiationTherapy.fractions"><code class="docutils literal notranslate"><span class="pre">RadiationTherapy.fractions</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RadiationTherapy.field_names"><code class="docutils literal notranslate"><span class="pre">RadiationTherapy.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RadiationTherapy.required_fields"><code class="docutils literal notranslate"><span class="pre">RadiationTherapy.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RadiationTherapy.from_dict"><code class="docutils literal notranslate"><span class="pre">RadiationTherapy.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RadiationTherapy.to_message"><code class="docutils literal notranslate"><span class="pre">RadiationTherapy.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RadiationTherapy.message_type"><code class="docutils literal notranslate"><span class="pre">RadiationTherapy.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RadiationTherapy.from_message"><code class="docutils literal notranslate"><span class="pre">RadiationTherapy.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.DrugType"><code class="docutils literal notranslate"><span class="pre">DrugType</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.DrugType.UNKNOWN_DRUG_TYPE"><code class="docutils literal notranslate"><span class="pre">DrugType.UNKNOWN_DRUG_TYPE</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DrugType.PRESCRIPTION"><code class="docutils literal notranslate"><span class="pre">DrugType.PRESCRIPTION</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DrugType.EHR_MEDICATION_LIST"><code class="docutils literal notranslate"><span class="pre">DrugType.EHR_MEDICATION_LIST</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DrugType.ADMINISTRATION_RELATED_TO_PROCEDURE"><code class="docutils literal notranslate"><span class="pre">DrugType.ADMINISTRATION_RELATED_TO_PROCEDURE</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.DoseInterval"><code class="docutils literal notranslate"><span class="pre">DoseInterval</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.DoseInterval.quantity"><code class="docutils literal notranslate"><span class="pre">DoseInterval.quantity</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DoseInterval.schedule_frequency"><code class="docutils literal notranslate"><span class="pre">DoseInterval.schedule_frequency</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DoseInterval.interval"><code class="docutils literal notranslate"><span class="pre">DoseInterval.interval</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DoseInterval.field_names"><code class="docutils literal notranslate"><span class="pre">DoseInterval.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DoseInterval.required_fields"><code class="docutils literal notranslate"><span class="pre">DoseInterval.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DoseInterval.from_dict"><code class="docutils literal notranslate"><span class="pre">DoseInterval.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DoseInterval.to_message"><code class="docutils literal notranslate"><span class="pre">DoseInterval.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DoseInterval.message_type"><code class="docutils literal notranslate"><span class="pre">DoseInterval.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DoseInterval.from_message"><code class="docutils literal notranslate"><span class="pre">DoseInterval.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Treatment"><code class="docutils literal notranslate"><span class="pre">Treatment</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Treatment.agent"><code class="docutils literal notranslate"><span class="pre">Treatment.agent</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Treatment.route_of_administration"><code class="docutils literal notranslate"><span class="pre">Treatment.route_of_administration</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Treatment.dose_intervals"><code class="docutils literal notranslate"><span class="pre">Treatment.dose_intervals</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Treatment.drug_type"><code class="docutils literal notranslate"><span class="pre">Treatment.drug_type</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Treatment.cumulative_dose"><code class="docutils literal notranslate"><span class="pre">Treatment.cumulative_dose</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Treatment.field_names"><code class="docutils literal notranslate"><span class="pre">Treatment.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Treatment.required_fields"><code class="docutils literal notranslate"><span class="pre">Treatment.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Treatment.from_dict"><code class="docutils literal notranslate"><span class="pre">Treatment.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Treatment.message_type"><code class="docutils literal notranslate"><span class="pre">Treatment.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Treatment.from_message"><code class="docutils literal notranslate"><span class="pre">Treatment.from_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Treatment.to_message"><code class="docutils literal notranslate"><span class="pre">Treatment.to_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction"><code class="docutils literal notranslate"><span class="pre">MedicalAction</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.action"><code class="docutils literal notranslate"><span class="pre">MedicalAction.action</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.procedure"><code class="docutils literal notranslate"><span class="pre">MedicalAction.procedure</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.treatment"><code class="docutils literal notranslate"><span class="pre">MedicalAction.treatment</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.radiation_therapy"><code class="docutils literal notranslate"><span class="pre">MedicalAction.radiation_therapy</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.therapeutic_regimen"><code class="docutils literal notranslate"><span class="pre">MedicalAction.therapeutic_regimen</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.treatment_target"><code class="docutils literal notranslate"><span class="pre">MedicalAction.treatment_target</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.treatment_intent"><code class="docutils literal notranslate"><span class="pre">MedicalAction.treatment_intent</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.response_to_treatment"><code class="docutils literal notranslate"><span class="pre">MedicalAction.response_to_treatment</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.adverse_events"><code class="docutils literal notranslate"><span class="pre">MedicalAction.adverse_events</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.treatment_termination_reason"><code class="docutils literal notranslate"><span class="pre">MedicalAction.treatment_termination_reason</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.field_names"><code class="docutils literal notranslate"><span class="pre">MedicalAction.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.required_fields"><code class="docutils literal notranslate"><span class="pre">MedicalAction.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.from_dict"><code class="docutils literal notranslate"><span class="pre">MedicalAction.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.to_message"><code class="docutils literal notranslate"><span class="pre">MedicalAction.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.message_type"><code class="docutils literal notranslate"><span class="pre">MedicalAction.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MedicalAction.from_message"><code class="docutils literal notranslate"><span class="pre">MedicalAction.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Expression"><code class="docutils literal notranslate"><span class="pre">Expression</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Expression.syntax"><code class="docutils literal notranslate"><span class="pre">Expression.syntax</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Expression.value"><code class="docutils literal notranslate"><span class="pre">Expression.value</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Expression.version"><code class="docutils literal notranslate"><span class="pre">Expression.version</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Expression.field_names"><code class="docutils literal notranslate"><span class="pre">Expression.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Expression.required_fields"><code class="docutils literal notranslate"><span class="pre">Expression.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Expression.from_dict"><code class="docutils literal notranslate"><span class="pre">Expression.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Expression.to_message"><code class="docutils literal notranslate"><span class="pre">Expression.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Expression.message_type"><code class="docutils literal notranslate"><span class="pre">Expression.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Expression.from_message"><code class="docutils literal notranslate"><span class="pre">Expression.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Extension"><code class="docutils literal notranslate"><span class="pre">Extension</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Extension.name"><code class="docutils literal notranslate"><span class="pre">Extension.name</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Extension.value"><code class="docutils literal notranslate"><span class="pre">Extension.value</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Extension.field_names"><code class="docutils literal notranslate"><span class="pre">Extension.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Extension.required_fields"><code class="docutils literal notranslate"><span class="pre">Extension.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Extension.from_dict"><code class="docutils literal notranslate"><span class="pre">Extension.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Extension.to_message"><code class="docutils literal notranslate"><span class="pre">Extension.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Extension.message_type"><code class="docutils literal notranslate"><span class="pre">Extension.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Extension.from_message"><code class="docutils literal notranslate"><span class="pre">Extension.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord"><code class="docutils literal notranslate"><span class="pre">VcfRecord</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord.genome_assembly"><code class="docutils literal notranslate"><span class="pre">VcfRecord.genome_assembly</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord.chrom"><code class="docutils literal notranslate"><span class="pre">VcfRecord.chrom</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord.pos"><code class="docutils literal notranslate"><span class="pre">VcfRecord.pos</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord.ref"><code class="docutils literal notranslate"><span class="pre">VcfRecord.ref</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord.alt"><code class="docutils literal notranslate"><span class="pre">VcfRecord.alt</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord.id"><code class="docutils literal notranslate"><span class="pre">VcfRecord.id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord.qual"><code class="docutils literal notranslate"><span class="pre">VcfRecord.qual</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord.filter"><code class="docutils literal notranslate"><span class="pre">VcfRecord.filter</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord.info"><code class="docutils literal notranslate"><span class="pre">VcfRecord.info</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord.field_names"><code class="docutils literal notranslate"><span class="pre">VcfRecord.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord.required_fields"><code class="docutils literal notranslate"><span class="pre">VcfRecord.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord.from_dict"><code class="docutils literal notranslate"><span class="pre">VcfRecord.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord.to_message"><code class="docutils literal notranslate"><span class="pre">VcfRecord.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord.message_type"><code class="docutils literal notranslate"><span class="pre">VcfRecord.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VcfRecord.from_message"><code class="docutils literal notranslate"><span class="pre">VcfRecord.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.MoleculeContext"><code class="docutils literal notranslate"><span class="pre">MoleculeContext</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.MoleculeContext.unspecified_molecule_context"><code class="docutils literal notranslate"><span class="pre">MoleculeContext.unspecified_molecule_context</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MoleculeContext.genomic"><code class="docutils literal notranslate"><span class="pre">MoleculeContext.genomic</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MoleculeContext.transcript"><code class="docutils literal notranslate"><span class="pre">MoleculeContext.transcript</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MoleculeContext.protein"><code class="docutils literal notranslate"><span class="pre">MoleculeContext.protein</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.id"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.molecule_context"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.molecule_context</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.label"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.label</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.description"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.description</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.gene_context"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.gene_context</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.expressions"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.expressions</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.vcf_record"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.vcf_record</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.xrefs"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.xrefs</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.alternate_labels"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.alternate_labels</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.extensions"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.extensions</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.structural_type"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.structural_type</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.vrs_ref_allele_seq"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.vrs_ref_allele_seq</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.allelic_state"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.allelic_state</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.field_names"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.required_fields"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.from_dict"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.to_message"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.message_type"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationDescriptor.from_message"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.PhenotypicFeature"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.PhenotypicFeature.type"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature.type</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.PhenotypicFeature.excluded"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature.excluded</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.PhenotypicFeature.description"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature.description</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.PhenotypicFeature.severity"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature.severity</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.PhenotypicFeature.modifiers"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature.modifiers</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.PhenotypicFeature.onset"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature.onset</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.PhenotypicFeature.resolution"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature.resolution</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.PhenotypicFeature.evidence"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature.evidence</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.PhenotypicFeature.field_names"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.PhenotypicFeature.required_fields"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.PhenotypicFeature.from_dict"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.PhenotypicFeature.to_message"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.PhenotypicFeature.message_type"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.PhenotypicFeature.from_message"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Disease"><code class="docutils literal notranslate"><span class="pre">Disease</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Disease.term"><code class="docutils literal notranslate"><span class="pre">Disease.term</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Disease.excluded"><code class="docutils literal notranslate"><span class="pre">Disease.excluded</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Disease.onset"><code class="docutils literal notranslate"><span class="pre">Disease.onset</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Disease.resolution"><code class="docutils literal notranslate"><span class="pre">Disease.resolution</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Disease.disease_stage"><code class="docutils literal notranslate"><span class="pre">Disease.disease_stage</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Disease.clinical_tnm_finding"><code class="docutils literal notranslate"><span class="pre">Disease.clinical_tnm_finding</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Disease.primary_site"><code class="docutils literal notranslate"><span class="pre">Disease.primary_site</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Disease.laterality"><code class="docutils literal notranslate"><span class="pre">Disease.laterality</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Disease.field_names"><code class="docutils literal notranslate"><span class="pre">Disease.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Disease.required_fields"><code class="docutils literal notranslate"><span class="pre">Disease.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Disease.from_dict"><code class="docutils literal notranslate"><span class="pre">Disease.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Disease.to_message"><code class="docutils literal notranslate"><span class="pre">Disease.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Disease.message_type"><code class="docutils literal notranslate"><span class="pre">Disease.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Disease.from_message"><code class="docutils literal notranslate"><span class="pre">Disease.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample"><code class="docutils literal notranslate"><span class="pre">Biosample</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.id"><code class="docutils literal notranslate"><span class="pre">Biosample.id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.individual_id"><code class="docutils literal notranslate"><span class="pre">Biosample.individual_id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.derived_from_id"><code class="docutils literal notranslate"><span class="pre">Biosample.derived_from_id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.description"><code class="docutils literal notranslate"><span class="pre">Biosample.description</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.sampled_tissue"><code class="docutils literal notranslate"><span class="pre">Biosample.sampled_tissue</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.sample_type"><code class="docutils literal notranslate"><span class="pre">Biosample.sample_type</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.phenotypic_features"><code class="docutils literal notranslate"><span class="pre">Biosample.phenotypic_features</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.measurements"><code class="docutils literal notranslate"><span class="pre">Biosample.measurements</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.taxonomy"><code class="docutils literal notranslate"><span class="pre">Biosample.taxonomy</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.time_of_collection"><code class="docutils literal notranslate"><span class="pre">Biosample.time_of_collection</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.histological_diagnosis"><code class="docutils literal notranslate"><span class="pre">Biosample.histological_diagnosis</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.tumor_progression"><code class="docutils literal notranslate"><span class="pre">Biosample.tumor_progression</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.tumor_grade"><code class="docutils literal notranslate"><span class="pre">Biosample.tumor_grade</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.pathological_stage"><code class="docutils literal notranslate"><span class="pre">Biosample.pathological_stage</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.pathological_tnm_finding"><code class="docutils literal notranslate"><span class="pre">Biosample.pathological_tnm_finding</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.diagnostic_markers"><code class="docutils literal notranslate"><span class="pre">Biosample.diagnostic_markers</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.procedure"><code class="docutils literal notranslate"><span class="pre">Biosample.procedure</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.files"><code class="docutils literal notranslate"><span class="pre">Biosample.files</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.material_sample"><code class="docutils literal notranslate"><span class="pre">Biosample.material_sample</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.sample_processing"><code class="docutils literal notranslate"><span class="pre">Biosample.sample_processing</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.sample_storage"><code class="docutils literal notranslate"><span class="pre">Biosample.sample_storage</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.field_names"><code class="docutils literal notranslate"><span class="pre">Biosample.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.required_fields"><code class="docutils literal notranslate"><span class="pre">Biosample.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.from_dict"><code class="docutils literal notranslate"><span class="pre">Biosample.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.to_message"><code class="docutils literal notranslate"><span class="pre">Biosample.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.message_type"><code class="docutils literal notranslate"><span class="pre">Biosample.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Biosample.from_message"><code class="docutils literal notranslate"><span class="pre">Biosample.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.MetaData"><code class="docutils literal notranslate"><span class="pre">MetaData</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.MetaData.created"><code class="docutils literal notranslate"><span class="pre">MetaData.created</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MetaData.created_by"><code class="docutils literal notranslate"><span class="pre">MetaData.created_by</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MetaData.submitted_by"><code class="docutils literal notranslate"><span class="pre">MetaData.submitted_by</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MetaData.resources"><code class="docutils literal notranslate"><span class="pre">MetaData.resources</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MetaData.updates"><code class="docutils literal notranslate"><span class="pre">MetaData.updates</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MetaData.phenopacket_schema_version"><code class="docutils literal notranslate"><span class="pre">MetaData.phenopacket_schema_version</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MetaData.external_references"><code class="docutils literal notranslate"><span class="pre">MetaData.external_references</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MetaData.field_names"><code class="docutils literal notranslate"><span class="pre">MetaData.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MetaData.required_fields"><code class="docutils literal notranslate"><span class="pre">MetaData.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MetaData.from_dict"><code class="docutils literal notranslate"><span class="pre">MetaData.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MetaData.to_message"><code class="docutils literal notranslate"><span class="pre">MetaData.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MetaData.message_type"><code class="docutils literal notranslate"><span class="pre">MetaData.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.MetaData.from_message"><code class="docutils literal notranslate"><span class="pre">MetaData.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Resource"><code class="docutils literal notranslate"><span class="pre">Resource</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Resource.id"><code class="docutils literal notranslate"><span class="pre">Resource.id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Resource.name"><code class="docutils literal notranslate"><span class="pre">Resource.name</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Resource.url"><code class="docutils literal notranslate"><span class="pre">Resource.url</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Resource.version"><code class="docutils literal notranslate"><span class="pre">Resource.version</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Resource.namespace_prefix"><code class="docutils literal notranslate"><span class="pre">Resource.namespace_prefix</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Resource.iri_prefix"><code class="docutils literal notranslate"><span class="pre">Resource.iri_prefix</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Resource.field_names"><code class="docutils literal notranslate"><span class="pre">Resource.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Resource.required_fields"><code class="docutils literal notranslate"><span class="pre">Resource.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Resource.from_dict"><code class="docutils literal notranslate"><span class="pre">Resource.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Resource.message_type"><code class="docutils literal notranslate"><span class="pre">Resource.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Resource.from_message"><code class="docutils literal notranslate"><span class="pre">Resource.from_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Resource.to_message"><code class="docutils literal notranslate"><span class="pre">Resource.to_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Update"><code class="docutils literal notranslate"><span class="pre">Update</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Update.timestamp"><code class="docutils literal notranslate"><span class="pre">Update.timestamp</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Update.updated_by"><code class="docutils literal notranslate"><span class="pre">Update.updated_by</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Update.comment"><code class="docutils literal notranslate"><span class="pre">Update.comment</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Update.field_names"><code class="docutils literal notranslate"><span class="pre">Update.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Update.required_fields"><code class="docutils literal notranslate"><span class="pre">Update.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Update.from_dict"><code class="docutils literal notranslate"><span class="pre">Update.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Update.message_type"><code class="docutils literal notranslate"><span class="pre">Update.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Update.from_message"><code class="docutils literal notranslate"><span class="pre">Update.from_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Update.to_message"><code class="docutils literal notranslate"><span class="pre">Update.to_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.OntologyClass"><code class="docutils literal notranslate"><span class="pre">OntologyClass</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.OntologyClass.id"><code class="docutils literal notranslate"><span class="pre">OntologyClass.id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.OntologyClass.label"><code class="docutils literal notranslate"><span class="pre">OntologyClass.label</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.OntologyClass.field_names"><code class="docutils literal notranslate"><span class="pre">OntologyClass.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.OntologyClass.required_fields"><code class="docutils literal notranslate"><span class="pre">OntologyClass.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.OntologyClass.from_dict"><code class="docutils literal notranslate"><span class="pre">OntologyClass.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.OntologyClass.to_message"><code class="docutils literal notranslate"><span class="pre">OntologyClass.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.OntologyClass.message_type"><code class="docutils literal notranslate"><span class="pre">OntologyClass.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.OntologyClass.from_message"><code class="docutils literal notranslate"><span class="pre">OntologyClass.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.ExternalReference"><code class="docutils literal notranslate"><span class="pre">ExternalReference</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.ExternalReference.id"><code class="docutils literal notranslate"><span class="pre">ExternalReference.id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ExternalReference.reference"><code class="docutils literal notranslate"><span class="pre">ExternalReference.reference</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ExternalReference.description"><code class="docutils literal notranslate"><span class="pre">ExternalReference.description</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ExternalReference.field_names"><code class="docutils literal notranslate"><span class="pre">ExternalReference.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ExternalReference.required_fields"><code class="docutils literal notranslate"><span class="pre">ExternalReference.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ExternalReference.from_dict"><code class="docutils literal notranslate"><span class="pre">ExternalReference.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ExternalReference.to_message"><code class="docutils literal notranslate"><span class="pre">ExternalReference.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ExternalReference.message_type"><code class="docutils literal notranslate"><span class="pre">ExternalReference.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ExternalReference.from_message"><code class="docutils literal notranslate"><span class="pre">ExternalReference.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Evidence"><code class="docutils literal notranslate"><span class="pre">Evidence</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Evidence.evidence_code"><code class="docutils literal notranslate"><span class="pre">Evidence.evidence_code</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Evidence.reference"><code class="docutils literal notranslate"><span class="pre">Evidence.reference</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Evidence.field_names"><code class="docutils literal notranslate"><span class="pre">Evidence.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Evidence.required_fields"><code class="docutils literal notranslate"><span class="pre">Evidence.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Evidence.from_dict"><code class="docutils literal notranslate"><span class="pre">Evidence.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Evidence.to_message"><code class="docutils literal notranslate"><span class="pre">Evidence.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Evidence.message_type"><code class="docutils literal notranslate"><span class="pre">Evidence.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Evidence.from_message"><code class="docutils literal notranslate"><span class="pre">Evidence.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Procedure"><code class="docutils literal notranslate"><span class="pre">Procedure</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Procedure.code"><code class="docutils literal notranslate"><span class="pre">Procedure.code</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Procedure.body_site"><code class="docutils literal notranslate"><span class="pre">Procedure.body_site</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Procedure.performed"><code class="docutils literal notranslate"><span class="pre">Procedure.performed</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Procedure.field_names"><code class="docutils literal notranslate"><span class="pre">Procedure.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Procedure.required_fields"><code class="docutils literal notranslate"><span class="pre">Procedure.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Procedure.from_dict"><code class="docutils literal notranslate"><span class="pre">Procedure.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Procedure.to_message"><code class="docutils literal notranslate"><span class="pre">Procedure.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Procedure.message_type"><code class="docutils literal notranslate"><span class="pre">Procedure.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Procedure.from_message"><code class="docutils literal notranslate"><span class="pre">Procedure.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.GestationalAge"><code class="docutils literal notranslate"><span class="pre">GestationalAge</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.GestationalAge.weeks"><code class="docutils literal notranslate"><span class="pre">GestationalAge.weeks</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GestationalAge.days"><code class="docutils literal notranslate"><span class="pre">GestationalAge.days</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GestationalAge.field_names"><code class="docutils literal notranslate"><span class="pre">GestationalAge.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GestationalAge.required_fields"><code class="docutils literal notranslate"><span class="pre">GestationalAge.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GestationalAge.from_dict"><code class="docutils literal notranslate"><span class="pre">GestationalAge.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GestationalAge.to_message"><code class="docutils literal notranslate"><span class="pre">GestationalAge.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GestationalAge.message_type"><code class="docutils literal notranslate"><span class="pre">GestationalAge.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.GestationalAge.from_message"><code class="docutils literal notranslate"><span class="pre">GestationalAge.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Age"><code class="docutils literal notranslate"><span class="pre">Age</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Age.iso8601duration"><code class="docutils literal notranslate"><span class="pre">Age.iso8601duration</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Age.field_names"><code class="docutils literal notranslate"><span class="pre">Age.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Age.required_fields"><code class="docutils literal notranslate"><span class="pre">Age.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Age.from_dict"><code class="docutils literal notranslate"><span class="pre">Age.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Age.to_message"><code class="docutils literal notranslate"><span class="pre">Age.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Age.message_type"><code class="docutils literal notranslate"><span class="pre">Age.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Age.from_message"><code class="docutils literal notranslate"><span class="pre">Age.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.AgeRange"><code class="docutils literal notranslate"><span class="pre">AgeRange</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.AgeRange.start"><code class="docutils literal notranslate"><span class="pre">AgeRange.start</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.AgeRange.end"><code class="docutils literal notranslate"><span class="pre">AgeRange.end</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.AgeRange.field_names"><code class="docutils literal notranslate"><span class="pre">AgeRange.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.AgeRange.required_fields"><code class="docutils literal notranslate"><span class="pre">AgeRange.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.AgeRange.from_dict"><code class="docutils literal notranslate"><span class="pre">AgeRange.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.AgeRange.to_message"><code class="docutils literal notranslate"><span class="pre">AgeRange.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.AgeRange.message_type"><code class="docutils literal notranslate"><span class="pre">AgeRange.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.AgeRange.from_message"><code class="docutils literal notranslate"><span class="pre">AgeRange.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.TimeInterval"><code class="docutils literal notranslate"><span class="pre">TimeInterval</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.TimeInterval.start"><code class="docutils literal notranslate"><span class="pre">TimeInterval.start</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeInterval.end"><code class="docutils literal notranslate"><span class="pre">TimeInterval.end</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeInterval.field_names"><code class="docutils literal notranslate"><span class="pre">TimeInterval.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeInterval.required_fields"><code class="docutils literal notranslate"><span class="pre">TimeInterval.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeInterval.from_dict"><code class="docutils literal notranslate"><span class="pre">TimeInterval.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeInterval.to_message"><code class="docutils literal notranslate"><span class="pre">TimeInterval.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeInterval.message_type"><code class="docutils literal notranslate"><span class="pre">TimeInterval.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeInterval.from_message"><code class="docutils literal notranslate"><span class="pre">TimeInterval.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.TimeElement"><code class="docutils literal notranslate"><span class="pre">TimeElement</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.TimeElement.element"><code class="docutils literal notranslate"><span class="pre">TimeElement.element</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeElement.age"><code class="docutils literal notranslate"><span class="pre">TimeElement.age</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeElement.age_range"><code class="docutils literal notranslate"><span class="pre">TimeElement.age_range</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeElement.ontology_class"><code class="docutils literal notranslate"><span class="pre">TimeElement.ontology_class</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeElement.timestamp"><code class="docutils literal notranslate"><span class="pre">TimeElement.timestamp</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeElement.interval"><code class="docutils literal notranslate"><span class="pre">TimeElement.interval</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeElement.gestational_age"><code class="docutils literal notranslate"><span class="pre">TimeElement.gestational_age</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeElement.field_names"><code class="docutils literal notranslate"><span class="pre">TimeElement.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeElement.required_fields"><code class="docutils literal notranslate"><span class="pre">TimeElement.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeElement.from_dict"><code class="docutils literal notranslate"><span class="pre">TimeElement.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeElement.to_message"><code class="docutils literal notranslate"><span class="pre">TimeElement.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeElement.message_type"><code class="docutils literal notranslate"><span class="pre">TimeElement.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.TimeElement.from_message"><code class="docutils literal notranslate"><span class="pre">TimeElement.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Timestamp"><code class="docutils literal notranslate"><span class="pre">Timestamp</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Timestamp.seconds"><code class="docutils literal notranslate"><span class="pre">Timestamp.seconds</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Timestamp.nanos"><code class="docutils literal notranslate"><span class="pre">Timestamp.nanos</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Timestamp.as_datetime"><code class="docutils literal notranslate"><span class="pre">Timestamp.as_datetime()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Timestamp.as_str"><code class="docutils literal notranslate"><span class="pre">Timestamp.as_str()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Timestamp.from_str"><code class="docutils literal notranslate"><span class="pre">Timestamp.from_str()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Timestamp.from_datetime"><code class="docutils literal notranslate"><span class="pre">Timestamp.from_datetime()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Timestamp.to_message"><code class="docutils literal notranslate"><span class="pre">Timestamp.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Timestamp.message_type"><code class="docutils literal notranslate"><span class="pre">Timestamp.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Timestamp.from_message"><code class="docutils literal notranslate"><span class="pre">Timestamp.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.File"><code class="docutils literal notranslate"><span class="pre">File</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.File.uri"><code class="docutils literal notranslate"><span class="pre">File.uri</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.File.individual_to_file_identifiers"><code class="docutils literal notranslate"><span class="pre">File.individual_to_file_identifiers</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.File.file_attributes"><code class="docutils literal notranslate"><span class="pre">File.file_attributes</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.File.field_names"><code class="docutils literal notranslate"><span class="pre">File.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.File.required_fields"><code class="docutils literal notranslate"><span class="pre">File.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.File.from_dict"><code class="docutils literal notranslate"><span class="pre">File.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.File.to_message"><code class="docutils literal notranslate"><span class="pre">File.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.File.message_type"><code class="docutils literal notranslate"><span class="pre">File.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.File.from_message"><code class="docutils literal notranslate"><span class="pre">File.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Gene"><code class="docutils literal notranslate"><span class="pre">Gene</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Gene.gene_id"><code class="docutils literal notranslate"><span class="pre">Gene.gene_id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Gene.field_names"><code class="docutils literal notranslate"><span class="pre">Gene.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Gene.required_fields"><code class="docutils literal notranslate"><span class="pre">Gene.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Gene.from_dict"><code class="docutils literal notranslate"><span class="pre">Gene.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Gene.to_message"><code class="docutils literal notranslate"><span class="pre">Gene.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Gene.message_type"><code class="docutils literal notranslate"><span class="pre">Gene.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Gene.from_message"><code class="docutils literal notranslate"><span class="pre">Gene.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Text"><code class="docutils literal notranslate"><span class="pre">Text</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Text.definition"><code class="docutils literal notranslate"><span class="pre">Text.definition</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Text.field_names"><code class="docutils literal notranslate"><span class="pre">Text.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Text.required_fields"><code class="docutils literal notranslate"><span class="pre">Text.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Text.from_dict"><code class="docutils literal notranslate"><span class="pre">Text.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Text.to_message"><code class="docutils literal notranslate"><span class="pre">Text.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Text.message_type"><code class="docutils literal notranslate"><span class="pre">Text.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Text.from_message"><code class="docutils literal notranslate"><span class="pre">Text.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Number"><code class="docutils literal notranslate"><span class="pre">Number</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Number.value"><code class="docutils literal notranslate"><span class="pre">Number.value</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Number.field_names"><code class="docutils literal notranslate"><span class="pre">Number.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Number.required_fields"><code class="docutils literal notranslate"><span class="pre">Number.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Number.from_dict"><code class="docutils literal notranslate"><span class="pre">Number.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Number.to_message"><code class="docutils literal notranslate"><span class="pre">Number.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Number.message_type"><code class="docutils literal notranslate"><span class="pre">Number.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Number.from_message"><code class="docutils literal notranslate"><span class="pre">Number.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.IndefiniteRange"><code class="docutils literal notranslate"><span class="pre">IndefiniteRange</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.IndefiniteRange.value"><code class="docutils literal notranslate"><span class="pre">IndefiniteRange.value</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.IndefiniteRange.comparator"><code class="docutils literal notranslate"><span class="pre">IndefiniteRange.comparator</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.IndefiniteRange.field_names"><code class="docutils literal notranslate"><span class="pre">IndefiniteRange.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.IndefiniteRange.required_fields"><code class="docutils literal notranslate"><span class="pre">IndefiniteRange.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.IndefiniteRange.from_dict"><code class="docutils literal notranslate"><span class="pre">IndefiniteRange.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.IndefiniteRange.message_type"><code class="docutils literal notranslate"><span class="pre">IndefiniteRange.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.IndefiniteRange.to_message"><code class="docutils literal notranslate"><span class="pre">IndefiniteRange.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.IndefiniteRange.from_message"><code class="docutils literal notranslate"><span class="pre">IndefiniteRange.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.DefiniteRange"><code class="docutils literal notranslate"><span class="pre">DefiniteRange</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.DefiniteRange.min"><code class="docutils literal notranslate"><span class="pre">DefiniteRange.min</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DefiniteRange.max"><code class="docutils literal notranslate"><span class="pre">DefiniteRange.max</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DefiniteRange.field_names"><code class="docutils literal notranslate"><span class="pre">DefiniteRange.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DefiniteRange.required_fields"><code class="docutils literal notranslate"><span class="pre">DefiniteRange.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DefiniteRange.from_dict"><code class="docutils literal notranslate"><span class="pre">DefiniteRange.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DefiniteRange.message_type"><code class="docutils literal notranslate"><span class="pre">DefiniteRange.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DefiniteRange.to_message"><code class="docutils literal notranslate"><span class="pre">DefiniteRange.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DefiniteRange.from_message"><code class="docutils literal notranslate"><span class="pre">DefiniteRange.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.SimpleInterval"><code class="docutils literal notranslate"><span class="pre">SimpleInterval</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.SimpleInterval.start"><code class="docutils literal notranslate"><span class="pre">SimpleInterval.start</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SimpleInterval.end"><code class="docutils literal notranslate"><span class="pre">SimpleInterval.end</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SimpleInterval.field_names"><code class="docutils literal notranslate"><span class="pre">SimpleInterval.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SimpleInterval.required_fields"><code class="docutils literal notranslate"><span class="pre">SimpleInterval.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SimpleInterval.from_dict"><code class="docutils literal notranslate"><span class="pre">SimpleInterval.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SimpleInterval.message_type"><code class="docutils literal notranslate"><span class="pre">SimpleInterval.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SimpleInterval.to_message"><code class="docutils literal notranslate"><span class="pre">SimpleInterval.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SimpleInterval.from_message"><code class="docutils literal notranslate"><span class="pre">SimpleInterval.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval"><code class="docutils literal notranslate"><span class="pre">SequenceInterval</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval.start"><code class="docutils literal notranslate"><span class="pre">SequenceInterval.start</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval.start_number"><code class="docutils literal notranslate"><span class="pre">SequenceInterval.start_number</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval.start_indefinite_range"><code class="docutils literal notranslate"><span class="pre">SequenceInterval.start_indefinite_range</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval.start_definite_range"><code class="docutils literal notranslate"><span class="pre">SequenceInterval.start_definite_range</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval.end"><code class="docutils literal notranslate"><span class="pre">SequenceInterval.end</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval.end_number"><code class="docutils literal notranslate"><span class="pre">SequenceInterval.end_number</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval.end_indefinite_range"><code class="docutils literal notranslate"><span class="pre">SequenceInterval.end_indefinite_range</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval.end_definite_range"><code class="docutils literal notranslate"><span class="pre">SequenceInterval.end_definite_range</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval.field_names"><code class="docutils literal notranslate"><span class="pre">SequenceInterval.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval.required_fields"><code class="docutils literal notranslate"><span class="pre">SequenceInterval.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval.to_dict"><code class="docutils literal notranslate"><span class="pre">SequenceInterval.to_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval.from_dict"><code class="docutils literal notranslate"><span class="pre">SequenceInterval.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval.to_message"><code class="docutils literal notranslate"><span class="pre">SequenceInterval.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval.message_type"><code class="docutils literal notranslate"><span class="pre">SequenceInterval.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceInterval.from_message"><code class="docutils literal notranslate"><span class="pre">SequenceInterval.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceLocation"><code class="docutils literal notranslate"><span class="pre">SequenceLocation</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.SequenceLocation.sequence_id"><code class="docutils literal notranslate"><span class="pre">SequenceLocation.sequence_id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceLocation.interval"><code class="docutils literal notranslate"><span class="pre">SequenceLocation.interval</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceLocation.sequence_interval"><code class="docutils literal notranslate"><span class="pre">SequenceLocation.sequence_interval</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceLocation.simple_interval"><code class="docutils literal notranslate"><span class="pre">SequenceLocation.simple_interval</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceLocation.field_names"><code class="docutils literal notranslate"><span class="pre">SequenceLocation.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceLocation.required_fields"><code class="docutils literal notranslate"><span class="pre">SequenceLocation.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceLocation.from_dict"><code class="docutils literal notranslate"><span class="pre">SequenceLocation.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceLocation.to_message"><code class="docutils literal notranslate"><span class="pre">SequenceLocation.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceLocation.message_type"><code class="docutils literal notranslate"><span class="pre">SequenceLocation.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceLocation.from_message"><code class="docutils literal notranslate"><span class="pre">SequenceLocation.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceState"><code class="docutils literal notranslate"><span class="pre">SequenceState</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.SequenceState.sequence"><code class="docutils literal notranslate"><span class="pre">SequenceState.sequence</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceState.field_names"><code class="docutils literal notranslate"><span class="pre">SequenceState.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceState.required_fields"><code class="docutils literal notranslate"><span class="pre">SequenceState.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceState.from_dict"><code class="docutils literal notranslate"><span class="pre">SequenceState.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceState.to_message"><code class="docutils literal notranslate"><span class="pre">SequenceState.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceState.message_type"><code class="docutils literal notranslate"><span class="pre">SequenceState.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.SequenceState.from_message"><code class="docutils literal notranslate"><span class="pre">SequenceState.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.LiteralSequenceExpression"><code class="docutils literal notranslate"><span class="pre">LiteralSequenceExpression</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.LiteralSequenceExpression.sequence"><code class="docutils literal notranslate"><span class="pre">LiteralSequenceExpression.sequence</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.LiteralSequenceExpression.field_names"><code class="docutils literal notranslate"><span class="pre">LiteralSequenceExpression.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.LiteralSequenceExpression.required_fields"><code class="docutils literal notranslate"><span class="pre">LiteralSequenceExpression.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.LiteralSequenceExpression.from_dict"><code class="docutils literal notranslate"><span class="pre">LiteralSequenceExpression.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.LiteralSequenceExpression.to_message"><code class="docutils literal notranslate"><span class="pre">LiteralSequenceExpression.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.LiteralSequenceExpression.message_type"><code class="docutils literal notranslate"><span class="pre">LiteralSequenceExpression.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.LiteralSequenceExpression.from_message"><code class="docutils literal notranslate"><span class="pre">LiteralSequenceExpression.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.DerivedSequenceExpression"><code class="docutils literal notranslate"><span class="pre">DerivedSequenceExpression</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.DerivedSequenceExpression.location"><code class="docutils literal notranslate"><span class="pre">DerivedSequenceExpression.location</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DerivedSequenceExpression.reverse_complement"><code class="docutils literal notranslate"><span class="pre">DerivedSequenceExpression.reverse_complement</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DerivedSequenceExpression.field_names"><code class="docutils literal notranslate"><span class="pre">DerivedSequenceExpression.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DerivedSequenceExpression.required_fields"><code class="docutils literal notranslate"><span class="pre">DerivedSequenceExpression.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DerivedSequenceExpression.from_dict"><code class="docutils literal notranslate"><span class="pre">DerivedSequenceExpression.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DerivedSequenceExpression.to_message"><code class="docutils literal notranslate"><span class="pre">DerivedSequenceExpression.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DerivedSequenceExpression.message_type"><code class="docutils literal notranslate"><span class="pre">DerivedSequenceExpression.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.DerivedSequenceExpression.from_message"><code class="docutils literal notranslate"><span class="pre">DerivedSequenceExpression.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.RepeatedSequenceExpression"><code class="docutils literal notranslate"><span class="pre">RepeatedSequenceExpression</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.RepeatedSequenceExpression.seq_expr"><code class="docutils literal notranslate"><span class="pre">RepeatedSequenceExpression.seq_expr</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RepeatedSequenceExpression.literal_sequence_expression"><code class="docutils literal notranslate"><span class="pre">RepeatedSequenceExpression.literal_sequence_expression</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RepeatedSequenceExpression.derived_sequence_expression"><code class="docutils literal notranslate"><span class="pre">RepeatedSequenceExpression.derived_sequence_expression</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RepeatedSequenceExpression.count"><code class="docutils literal notranslate"><span class="pre">RepeatedSequenceExpression.count</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RepeatedSequenceExpression.number"><code class="docutils literal notranslate"><span class="pre">RepeatedSequenceExpression.number</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RepeatedSequenceExpression.indefinite_range"><code class="docutils literal notranslate"><span class="pre">RepeatedSequenceExpression.indefinite_range</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RepeatedSequenceExpression.definite_range"><code class="docutils literal notranslate"><span class="pre">RepeatedSequenceExpression.definite_range</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RepeatedSequenceExpression.field_names"><code class="docutils literal notranslate"><span class="pre">RepeatedSequenceExpression.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RepeatedSequenceExpression.required_fields"><code class="docutils literal notranslate"><span class="pre">RepeatedSequenceExpression.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RepeatedSequenceExpression.from_dict"><code class="docutils literal notranslate"><span class="pre">RepeatedSequenceExpression.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RepeatedSequenceExpression.to_message"><code class="docutils literal notranslate"><span class="pre">RepeatedSequenceExpression.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RepeatedSequenceExpression.message_type"><code class="docutils literal notranslate"><span class="pre">RepeatedSequenceExpression.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.RepeatedSequenceExpression.from_message"><code class="docutils literal notranslate"><span class="pre">RepeatedSequenceExpression.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.CytobandInterval"><code class="docutils literal notranslate"><span class="pre">CytobandInterval</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.CytobandInterval.start"><code class="docutils literal notranslate"><span class="pre">CytobandInterval.start</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CytobandInterval.end"><code class="docutils literal notranslate"><span class="pre">CytobandInterval.end</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CytobandInterval.field_names"><code class="docutils literal notranslate"><span class="pre">CytobandInterval.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CytobandInterval.required_fields"><code class="docutils literal notranslate"><span class="pre">CytobandInterval.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CytobandInterval.from_dict"><code class="docutils literal notranslate"><span class="pre">CytobandInterval.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CytobandInterval.message_type"><code class="docutils literal notranslate"><span class="pre">CytobandInterval.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CytobandInterval.to_message"><code class="docutils literal notranslate"><span class="pre">CytobandInterval.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CytobandInterval.from_message"><code class="docutils literal notranslate"><span class="pre">CytobandInterval.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.ChromosomeLocation"><code class="docutils literal notranslate"><span class="pre">ChromosomeLocation</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.ChromosomeLocation.species_id"><code class="docutils literal notranslate"><span class="pre">ChromosomeLocation.species_id</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ChromosomeLocation.chr"><code class="docutils literal notranslate"><span class="pre">ChromosomeLocation.chr</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ChromosomeLocation.interval"><code class="docutils literal notranslate"><span class="pre">ChromosomeLocation.interval</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ChromosomeLocation.field_names"><code class="docutils literal notranslate"><span class="pre">ChromosomeLocation.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ChromosomeLocation.required_fields"><code class="docutils literal notranslate"><span class="pre">ChromosomeLocation.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ChromosomeLocation.from_dict"><code class="docutils literal notranslate"><span class="pre">ChromosomeLocation.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ChromosomeLocation.message_type"><code class="docutils literal notranslate"><span class="pre">ChromosomeLocation.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ChromosomeLocation.to_message"><code class="docutils literal notranslate"><span class="pre">ChromosomeLocation.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.ChromosomeLocation.from_message"><code class="docutils literal notranslate"><span class="pre">ChromosomeLocation.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Allele"><code class="docutils literal notranslate"><span class="pre">Allele</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Allele.location"><code class="docutils literal notranslate"><span class="pre">Allele.location</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Allele.curie"><code class="docutils literal notranslate"><span class="pre">Allele.curie</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Allele.chromosome_location"><code class="docutils literal notranslate"><span class="pre">Allele.chromosome_location</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Allele.sequence_location"><code class="docutils literal notranslate"><span class="pre">Allele.sequence_location</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Allele.state"><code class="docutils literal notranslate"><span class="pre">Allele.state</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Allele.sequence_state"><code class="docutils literal notranslate"><span class="pre">Allele.sequence_state</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Allele.literal_sequence_expression"><code class="docutils literal notranslate"><span class="pre">Allele.literal_sequence_expression</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Allele.derived_sequence_expression"><code class="docutils literal notranslate"><span class="pre">Allele.derived_sequence_expression</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Allele.repeated_sequence_expression"><code class="docutils literal notranslate"><span class="pre">Allele.repeated_sequence_expression</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Allele.field_names"><code class="docutils literal notranslate"><span class="pre">Allele.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Allele.required_fields"><code class="docutils literal notranslate"><span class="pre">Allele.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Allele.from_dict"><code class="docutils literal notranslate"><span class="pre">Allele.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Allele.to_message"><code class="docutils literal notranslate"><span class="pre">Allele.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Allele.message_type"><code class="docutils literal notranslate"><span class="pre">Allele.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Allele.from_message"><code class="docutils literal notranslate"><span class="pre">Allele.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype"><code class="docutils literal notranslate"><span class="pre">Haplotype</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.Member"><code class="docutils literal notranslate"><span class="pre">Haplotype.Member</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.Member.value"><code class="docutils literal notranslate"><span class="pre">Haplotype.Member.value</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.Member.allele"><code class="docutils literal notranslate"><span class="pre">Haplotype.Member.allele</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.Member.curie"><code class="docutils literal notranslate"><span class="pre">Haplotype.Member.curie</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.Member.field_names"><code class="docutils literal notranslate"><span class="pre">Haplotype.Member.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.Member.required_fields"><code class="docutils literal notranslate"><span class="pre">Haplotype.Member.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.Member.from_dict"><code class="docutils literal notranslate"><span class="pre">Haplotype.Member.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.Member.to_message"><code class="docutils literal notranslate"><span class="pre">Haplotype.Member.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.Member.message_type"><code class="docutils literal notranslate"><span class="pre">Haplotype.Member.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.Member.from_message"><code class="docutils literal notranslate"><span class="pre">Haplotype.Member.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.members"><code class="docutils literal notranslate"><span class="pre">Haplotype.members</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.field_names"><code class="docutils literal notranslate"><span class="pre">Haplotype.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.required_fields"><code class="docutils literal notranslate"><span class="pre">Haplotype.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.from_dict"><code class="docutils literal notranslate"><span class="pre">Haplotype.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.to_message"><code class="docutils literal notranslate"><span class="pre">Haplotype.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.message_type"><code class="docutils literal notranslate"><span class="pre">Haplotype.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Haplotype.from_message"><code class="docutils literal notranslate"><span class="pre">Haplotype.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber"><code class="docutils literal notranslate"><span class="pre">CopyNumber</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.subject"><code class="docutils literal notranslate"><span class="pre">CopyNumber.subject</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.allele"><code class="docutils literal notranslate"><span class="pre">CopyNumber.allele</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.haplotype"><code class="docutils literal notranslate"><span class="pre">CopyNumber.haplotype</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.gene"><code class="docutils literal notranslate"><span class="pre">CopyNumber.gene</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.literal_sequence_expression"><code class="docutils literal notranslate"><span class="pre">CopyNumber.literal_sequence_expression</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.derived_sequence_expression"><code class="docutils literal notranslate"><span class="pre">CopyNumber.derived_sequence_expression</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.repeated_sequence_expression"><code class="docutils literal notranslate"><span class="pre">CopyNumber.repeated_sequence_expression</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.curie"><code class="docutils literal notranslate"><span class="pre">CopyNumber.curie</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.copies"><code class="docutils literal notranslate"><span class="pre">CopyNumber.copies</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.number"><code class="docutils literal notranslate"><span class="pre">CopyNumber.number</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.indefinite_range"><code class="docutils literal notranslate"><span class="pre">CopyNumber.indefinite_range</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.definite_range"><code class="docutils literal notranslate"><span class="pre">CopyNumber.definite_range</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.field_names"><code class="docutils literal notranslate"><span class="pre">CopyNumber.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.required_fields"><code class="docutils literal notranslate"><span class="pre">CopyNumber.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.from_dict"><code class="docutils literal notranslate"><span class="pre">CopyNumber.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.to_message"><code class="docutils literal notranslate"><span class="pre">CopyNumber.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.message_type"><code class="docutils literal notranslate"><span class="pre">CopyNumber.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.CopyNumber.from_message"><code class="docutils literal notranslate"><span class="pre">CopyNumber.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet"><code class="docutils literal notranslate"><span class="pre">VariationSet</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.Member"><code class="docutils literal notranslate"><span class="pre">VariationSet.Member</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.Member.value"><code class="docutils literal notranslate"><span class="pre">VariationSet.Member.value</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.Member.curie"><code class="docutils literal notranslate"><span class="pre">VariationSet.Member.curie</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.Member.allele"><code class="docutils literal notranslate"><span class="pre">VariationSet.Member.allele</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.Member.haplotype"><code class="docutils literal notranslate"><span class="pre">VariationSet.Member.haplotype</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.Member.copy_number"><code class="docutils literal notranslate"><span class="pre">VariationSet.Member.copy_number</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.Member.text"><code class="docutils literal notranslate"><span class="pre">VariationSet.Member.text</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.Member.variation_set"><code class="docutils literal notranslate"><span class="pre">VariationSet.Member.variation_set</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.Member.field_names"><code class="docutils literal notranslate"><span class="pre">VariationSet.Member.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.Member.required_fields"><code class="docutils literal notranslate"><span class="pre">VariationSet.Member.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.Member.from_dict"><code class="docutils literal notranslate"><span class="pre">VariationSet.Member.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.Member.to_message"><code class="docutils literal notranslate"><span class="pre">VariationSet.Member.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.Member.message_type"><code class="docutils literal notranslate"><span class="pre">VariationSet.Member.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.Member.from_message"><code class="docutils literal notranslate"><span class="pre">VariationSet.Member.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.members"><code class="docutils literal notranslate"><span class="pre">VariationSet.members</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.field_names"><code class="docutils literal notranslate"><span class="pre">VariationSet.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.required_fields"><code class="docutils literal notranslate"><span class="pre">VariationSet.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.from_dict"><code class="docutils literal notranslate"><span class="pre">VariationSet.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.to_message"><code class="docutils literal notranslate"><span class="pre">VariationSet.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.message_type"><code class="docutils literal notranslate"><span class="pre">VariationSet.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.VariationSet.from_message"><code class="docutils literal notranslate"><span class="pre">VariationSet.from_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ppsc.v202.Variation"><code class="docutils literal notranslate"><span class="pre">Variation</span></code></a><ul>
+<li><a class="reference internal" href="#ppsc.v202.Variation.variation"><code class="docutils literal notranslate"><span class="pre">Variation.variation</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Variation.allele"><code class="docutils literal notranslate"><span class="pre">Variation.allele</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Variation.haplotype"><code class="docutils literal notranslate"><span class="pre">Variation.haplotype</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Variation.copy_number"><code class="docutils literal notranslate"><span class="pre">Variation.copy_number</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Variation.text"><code class="docutils literal notranslate"><span class="pre">Variation.text</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Variation.variation_set"><code class="docutils literal notranslate"><span class="pre">Variation.variation_set</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Variation.field_names"><code class="docutils literal notranslate"><span class="pre">Variation.field_names()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Variation.required_fields"><code class="docutils literal notranslate"><span class="pre">Variation.required_fields()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Variation.from_dict"><code class="docutils literal notranslate"><span class="pre">Variation.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Variation.to_message"><code class="docutils literal notranslate"><span class="pre">Variation.to_message()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Variation.message_type"><code class="docutils literal notranslate"><span class="pre">Variation.message_type()</span></code></a></li>
+<li><a class="reference internal" href="#ppsc.v202.Variation.from_message"><code class="docutils literal notranslate"><span class="pre">Variation.from_message()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-
+</div>
         </div>
       </div>
     </nav>
@@ -83,8 +975,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">API reference</a></li>
-          <li class="breadcrumb-item"><a href="ppsc.html">ppsc package</a></li>
       <li class="breadcrumb-item active">ppsc.v202 package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/apidocs/ppsc.v202.rst.txt" rel="nofollow"> View page source</a>
@@ -4370,9 +5260,7 @@ which is 4 hours behind UTC:</p>
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="ppsc.parse.json.html" class="btn btn-neutral float-left" title="ppsc.parse.json package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
+          <footer>
 
   <hr/>
 
