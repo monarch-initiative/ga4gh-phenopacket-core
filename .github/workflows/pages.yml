@@ -1,0 +1,69 @@
+name: Deploy documentation to GitHub Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, develop ]
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
+        ref: main
+
+    - name: Set up Python 3
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+
+    - name: Build documentation
+      run: |
+        ## Init the target folder. 
+        # We will put all site documentation there.
+        mkdir -p gh-pages
+        touch gh-pages/.nojekyll
+        
+        function build_docs {
+          # The function will checkout a branch `BRANCH` and build the documentation 
+          # into the provided documentation directory `DOCDIR`.
+          BRANCH=${1}
+          DOCDIR=${2}
+        
+          git checkout ${BRANCH}
+          git fetch
+          git pull
+          python3 -m pip install .[docs]
+        
+          ## Init the target folder.
+          # We will put all site documentation there.
+          mkdir -p gh-pages/${DOCDIR}
+        
+          ## Build the docs
+          # Generate the HTML pages and move the generated content into the target folder.
+          printf "Building the %s documentation\n" ${DOCDIR}
+          cd docs
+          sphinx-apidoc --separate --module-first -d 2 -H "API reference" --follow-links -o apidocs ../src/ppsc
+          make clean html
+          
+          mv _build/html/* ../gh-pages/${DOCDIR}
+          cd ..
+        }
+        
+        # We store the docs for `main` in `stable` dir
+        build_docs main stable
+        # We store the docs for `development` in `latest` dir
+        build_docs develop latest
+
+
+    - name: Deploy documentation
+      if: ${{ github.event_name == 'push' }}
+      uses: JamesIves/github-pages-deploy-action@v4.4.1
+      with:
+        branch: gh-pages
+        force: true
+        folder: gh-pages
