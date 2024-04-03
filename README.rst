@@ -73,3 +73,12 @@ Similarly, we can dump/load any element to/from Protobuf bytes:
 >>> _ = byte_buf.seek(0)  # rewind
 >>> subject.time_at_last_encounter == TimeElement.from_pb(byte_buf)
 True
+
+
+Documentation
+^^^^^^^^^^^^^
+
+Find more info in our detailed documentation:
+
+- `Stable documentation <https://monarch-initiative.github.io/ga4gh-phenopacket-core/stable>`_: last release on the `main` branch
+- `Latest documentation <https://monarch-initiative.github.io/ga4gh-phenopacket-core/latest>`_: bleeding edge, last commit on the `development` branch
