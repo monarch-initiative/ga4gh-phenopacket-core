@@ -2,15 +2,12 @@
 GA4GH Phenopacket Core
 ======================
 
-.. TODO:
-  add badges
-
 Python convenience wrappers for Phenopacket Schema.
 
 Examples
 ^^^^^^^^
 
-We recommend importing all classes using the start import:
+We recommend importing all classes using the star import:
 
 .. code-block:: python
 
