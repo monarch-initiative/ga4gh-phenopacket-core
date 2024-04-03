@@ -12,7 +12,9 @@ Examples
 
 We recommend importing all classes using the start import:
 
->>> from ppsc.v202 import *
+.. doctest::
+
+  >>> from ppsc.v202 import *
 
 Create a Phenopacket Schema element
 ***********************************
@@ -20,13 +22,17 @@ Create a Phenopacket Schema element
 The library simplifies creation of the Phenopacket Schema elements:
 
 
->>> subject = Individual(id='retinoblastoma', sex=Sex.FEMALE)
+.. doctest::
+
+  >>> subject = Individual(id='retinoblastoma', sex=Sex.FEMALE)
 
 The objects can be modified in place:
 
->>> subject.sex = Sex.MALE
->>> subject.sex.name
-'MALE'
+.. doctest::
+
+  >>> subject.sex = Sex.MALE
+  >>> subject.sex.name
+  'MALE'
 
 including assignment of a more complex elements such as `TimeElement`:
 
