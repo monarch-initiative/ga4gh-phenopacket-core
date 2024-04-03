@@ -14,10 +14,8 @@ Feedback
 The best place to leave feedback, ask questions, and report bugs is the `Issue Tracker <https://github.com/monarch-initiative/ga4gh-phenopacket-core/issues>`_.
 
 .. toctree::
-    :caption: Installation & Tutorial
-    :name: tutorial
-    :maxdepth: 1
-    :hidden:
+   :maxdepth: 1
+   :caption: Contents:
 
     setup
     apidocs/modules
