@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ppsc.v202._gene_descriptor &mdash; ppsc 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/ppsc.css?v=a9fa5eb9" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=6dbb43f8"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ppsc
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation &amp; Tutorial</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../apidocs/modules.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ppsc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ppsc.v202._gene_descriptor</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ppsc.v202._gene_descriptor</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">import</span> <span class="nn">phenopackets</span> <span class="k">as</span> <span class="nn">pp202</span>
+<span class="kn">from</span> <span class="nn">google.protobuf.message</span> <span class="kn">import</span> <span class="n">Message</span>
+
+<span class="kn">from</span> <span class="nn">.._api</span> <span class="kn">import</span> <span class="n">MessageMixin</span>
+
+
+<div class="viewcode-block" id="GeneDescriptor">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.GeneDescriptor">[docs]</a>
+<span class="k">class</span> <span class="nc">GeneDescriptor</span><span class="p">(</span><span class="n">MessageMixin</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">value_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">description</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">alternate_ids</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">xrefs</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">alternate_symbols</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value_id</span> <span class="o">=</span> <span class="n">value_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_symbol</span> <span class="o">=</span> <span class="n">symbol</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_alternate_ids</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="n">alternate_ids</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">alternate_ids</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_xrefs</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="n">xrefs</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">xrefs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_alternate_symbols</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="n">alternate_symbols</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">alternate_symbols</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">value_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value_id</span>
+
+    <span class="nd">@value_id</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">value_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value_id</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_symbol</span>
+
+    <span class="nd">@symbol</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_symbol</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span>
+
+    <span class="nd">@description</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@description</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">alternate_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">MutableSequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alternate_ids</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">xrefs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">MutableSequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xrefs</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">alternate_symbols</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">MutableSequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alternate_symbols</span>
+
+<div class="viewcode-block" id="GeneDescriptor.field_names">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.GeneDescriptor.field_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">field_names</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;value_id&#39;</span><span class="p">,</span> <span class="s1">&#39;symbol&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;alternate_ids&#39;</span><span class="p">,</span> <span class="s1">&#39;xrefs&#39;</span><span class="p">,</span> <span class="s1">&#39;alternate_symbols&#39;</span><span class="p">,</span></div>
+
+
+<div class="viewcode-block" id="GeneDescriptor.required_fields">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.GeneDescriptor.required_fields">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">required_fields</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;value_id&#39;</span><span class="p">,</span> <span class="s1">&#39;symbol&#39;</span><span class="p">,</span></div>
+
+
+<div class="viewcode-block" id="GeneDescriptor.from_dict">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.GeneDescriptor.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_all_required_fields_are_present</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">GeneDescriptor</span><span class="p">(</span>
+                <span class="n">value_id</span><span class="o">=</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;value_id&#39;</span><span class="p">],</span>
+                <span class="n">symbol</span><span class="o">=</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">],</span>
+                <span class="n">description</span><span class="o">=</span><span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                <span class="n">alternate_ids</span><span class="o">=</span><span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;alternate_ids&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                <span class="n">xrefs</span><span class="o">=</span><span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;xrefs&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                <span class="n">alternate_symbols</span><span class="o">=</span><span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;alternate_symbols&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_complain_about_missing_field</span><span class="p">(</span><span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GeneDescriptor.to_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.GeneDescriptor.to_message">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span><span class="p">:</span>
+        <span class="n">gene_descriptor</span> <span class="o">=</span> <span class="n">pp202</span><span class="o">.</span><span class="n">GeneDescriptor</span><span class="p">(</span><span class="n">value_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_value_id</span><span class="p">,</span> <span class="n">symbol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_symbol</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">gene_descriptor</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span>
+
+        <span class="n">gene_descriptor</span><span class="o">.</span><span class="n">alternate_ids</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_alternate_ids</span><span class="p">)</span>
+        <span class="n">gene_descriptor</span><span class="o">.</span><span class="n">xrefs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xrefs</span><span class="p">)</span>
+        <span class="n">gene_descriptor</span><span class="o">.</span><span class="n">alternate_symbols</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_alternate_symbols</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">gene_descriptor</span></div>
+
+
+<div class="viewcode-block" id="GeneDescriptor.message_type">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.GeneDescriptor.message_type">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">message_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">GeneDescriptor</span></div>
+
+
+<div class="viewcode-block" id="GeneDescriptor.from_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.GeneDescriptor.from_message">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">message_type</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="n">GeneDescriptor</span><span class="p">(</span>
+                <span class="n">value_id</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">value_id</span><span class="p">,</span>
+                <span class="n">symbol</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span>
+                <span class="n">description</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">description</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="k">else</span> <span class="n">msg</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+                <span class="n">alternate_ids</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">alternate_ids</span><span class="p">,</span>
+                <span class="n">xrefs</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">xrefs</span><span class="p">,</span>
+                <span class="n">alternate_symbols</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">alternate_symbols</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">complain_about_incompatible_msg_type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">GeneDescriptor</span><span class="p">)</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value_id</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_value_id</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_symbol</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_symbol</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_description</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alternate_ids</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_alternate_ids</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xrefs</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_xrefs</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alternate_symbols</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_alternate_symbols</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;GeneDescriptor(&#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;value_id=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_value_id</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;symbol=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_symbol</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;description=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;alternate_ids=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_alternate_ids</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;xrefs=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_xrefs</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;alternate_symbols=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_alternate_symbols</span><span class="si">}</span><span class="s1">)&#39;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ppsc.v202._individual &mdash; ppsc 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/ppsc.css?v=a9fa5eb9" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=6dbb43f8"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ppsc
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation &amp; Tutorial</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../apidocs/modules.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ppsc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ppsc.v202._individual</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ppsc.v202._individual</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">enum</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">import</span> <span class="nn">phenopackets</span> <span class="k">as</span> <span class="nn">pp202</span>
+<span class="kn">from</span> <span class="nn">google.protobuf.message</span> <span class="kn">import</span> <span class="n">Message</span>
+
+<span class="kn">from</span> <span class="nn">._base</span> <span class="kn">import</span> <span class="n">TimeElement</span><span class="p">,</span> <span class="n">OntologyClass</span>
+<span class="kn">from</span> <span class="nn">.._api</span> <span class="kn">import</span> <span class="n">MessageMixin</span>
+<span class="kn">from</span> <span class="nn">.._timestamp</span> <span class="kn">import</span> <span class="n">Timestamp</span>
+<span class="kn">from</span> <span class="nn">..parse</span> <span class="kn">import</span> <span class="n">extract_message_scalar</span><span class="p">,</span> <span class="n">extract_pb_message_scalar</span>
+
+
+<div class="viewcode-block" id="Sex">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Sex">[docs]</a>
+<span class="k">class</span> <span class="nc">Sex</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An enumeration used to represent the sex of an individual. This element does not represent gender identity</span>
+<span class="sd">    or :class:`KaryotypicSex`, but instead represents typical “phenotypic sex”, as would be determined</span>
+<span class="sd">    by a midwife or physician at birth.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># The `int` values correspond to protobuf fields in Phenopacket Schema.</span>
+
+    <span class="n">UNKNOWN_SEX</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Not assessed or not available. </span>
+<span class="sd">    Maps to `NCIT:C17998 &lt;https://www.ebi.ac.uk/ols/ontologies/ncit/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FNCIT_C17998&gt;`_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">FEMALE</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Female sex. </span>
+<span class="sd">    Maps to `NCIT:C46113 &lt;https://www.ebi.ac.uk/ols/ontologies/ncit/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FNCIT_C46113&gt;`_.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">MALE</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Male sex. </span>
+<span class="sd">    Maps to `NCIT:C46112 &lt;https://www.ebi.ac.uk/ols/ontologies/ncit/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FNCIT_C46112&gt;`_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">OTHER_SEX</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    It is not possible to accurately assess the applicability of `MALE`/`FEMALE`. </span>
+<span class="sd">    Maps to `NCIT:C45908 &lt;https://www.ebi.ac.uk/ols/ontologies/ncit/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FNCIT_C45908&gt;`_</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="KaryotypicSex">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.KaryotypicSex">[docs]</a>
+<span class="k">class</span> <span class="nc">KaryotypicSex</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+
+    <span class="c1"># The `int` values correspond to protobuf fields in Phenopacket Schema.</span>
+    <span class="n">UNKNOWN_KARYOTYPE</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">XX</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">XY</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">XO</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">XXY</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">XXX</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">XXYY</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">XXXY</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">XXXX</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="n">XYY</span> <span class="o">=</span> <span class="mi">9</span>
+    <span class="n">OTHER_KARYOTYPE</span> <span class="o">=</span> <span class="mi">10</span></div>
+
+
+
+<div class="viewcode-block" id="VitalStatus">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.VitalStatus">[docs]</a>
+<span class="k">class</span> <span class="nc">VitalStatus</span><span class="p">(</span><span class="n">MessageMixin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TODO: add docs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="VitalStatus.Status">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.VitalStatus.Status">[docs]</a>
+    <span class="k">class</span> <span class="nc">Status</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        TODO: add docs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># The `int` values correspond to protobuf fields in Phenopacket Schema.</span>
+
+        <span class="n">UNKNOWN_STATUS</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">ALIVE</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">DECEASED</span> <span class="o">=</span> <span class="mi">2</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">status</span><span class="p">:</span> <span class="n">Status</span><span class="p">,</span>
+            <span class="n">time_of_death</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">TimeElement</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">cause_of_death</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">OntologyClass</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">survival_time_in_days</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">status</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time_of_death</span> <span class="o">=</span> <span class="n">time_of_death</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cause_of_death</span> <span class="o">=</span> <span class="n">cause_of_death</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_survival_time_in_days</span> <span class="o">=</span> <span class="n">survival_time_in_days</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Status</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span>
+
+    <span class="nd">@status</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Status</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">time_of_death</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">TimeElement</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_of_death</span>
+
+    <span class="nd">@time_of_death</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">time_of_death</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">TimeElement</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time_of_death</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@time_of_death</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">time_of_death</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time_of_death</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cause_of_death</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">OntologyClass</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cause_of_death</span>
+
+    <span class="nd">@cause_of_death</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">cause_of_death</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">OntologyClass</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cause_of_death</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@cause_of_death</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">cause_of_death</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cause_of_death</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">survival_time_in_days</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_survival_time_in_days</span>
+
+    <span class="nd">@survival_time_in_days</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">survival_time_in_days</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_survival_time_in_days</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@survival_time_in_days</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">survival_time_in_days</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_survival_time_in_days</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="VitalStatus.field_names">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.VitalStatus.field_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">field_names</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;time_of_death&#39;</span><span class="p">,</span> <span class="s1">&#39;cause_of_death&#39;</span><span class="p">,</span> <span class="s1">&#39;survival_time_in_days&#39;</span></div>
+
+
+<div class="viewcode-block" id="VitalStatus.required_fields">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.VitalStatus.required_fields">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">required_fields</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;status&#39;</span><span class="p">,</span></div>
+
+
+<div class="viewcode-block" id="VitalStatus.from_dict">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.VitalStatus.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_all_required_fields_are_present</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">VitalStatus</span><span class="p">(</span>
+                <span class="n">status</span><span class="o">=</span><span class="n">MessageMixin</span><span class="o">.</span><span class="n">_extract_enum_field</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="n">VitalStatus</span><span class="o">.</span><span class="n">Status</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">time_of_death</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;time_of_death&#39;</span><span class="p">,</span> <span class="n">TimeElement</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">cause_of_death</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;cause_of_death&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">survival_time_in_days</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;survival_time_in_days&#39;</span><span class="p">])</span> <span class="k">if</span> <span class="s1">&#39;survival_time_in_days&#39;</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_complain_about_missing_field</span><span class="p">(</span><span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VitalStatus.to_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.VitalStatus.to_message">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span><span class="p">:</span>
+        <span class="n">vs</span> <span class="o">=</span> <span class="n">pp202</span><span class="o">.</span><span class="n">VitalStatus</span><span class="p">(</span>
+            <span class="n">status</span><span class="o">=</span><span class="n">pp202</span><span class="o">.</span><span class="n">VitalStatus</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_of_death</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vs</span><span class="o">.</span><span class="n">time_of_death</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_of_death</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cause_of_death</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vs</span><span class="o">.</span><span class="n">cause_of_death</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cause_of_death</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_survival_time_in_days</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vs</span><span class="o">.</span><span class="n">survival_time_in_days</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_survival_time_in_days</span>
+
+        <span class="k">return</span> <span class="n">vs</span></div>
+
+
+<div class="viewcode-block" id="VitalStatus.message_type">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.VitalStatus.message_type">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">message_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">VitalStatus</span></div>
+
+
+<div class="viewcode-block" id="VitalStatus.from_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.VitalStatus.from_message">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">pp202</span><span class="o">.</span><span class="n">VitalStatus</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">VitalStatus</span><span class="p">(</span>
+                <span class="n">status</span><span class="o">=</span><span class="n">VitalStatus</span><span class="o">.</span><span class="n">Status</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">status</span><span class="p">),</span>
+                <span class="n">time_of_death</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;time_of_death&#39;</span><span class="p">,</span> <span class="n">TimeElement</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+                <span class="n">cause_of_death</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;cause_of_death&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+                <span class="n">survival_time_in_days</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">survival_time_in_days</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">msg</span><span class="o">.</span><span class="n">survival_time_in_days</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">complain_about_incompatible_msg_type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">VitalStatus</span><span class="p">)</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_status</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_of_death</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_time_of_death</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cause_of_death</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_cause_of_death</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_survival_time_in_days</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_survival_time_in_days</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;VitalStatus(&#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;status=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;time_of_death=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_of_death</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;cause_of_death=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_cause_of_death</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;survival_time_in_days=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_survival_time_in_days</span><span class="si">}</span><span class="s1">&#39;</span> \
+               <span class="s1">&#39;)&#39;</span></div>
+
+
+
+<div class="viewcode-block" id="Individual">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Individual">[docs]</a>
+<span class="k">class</span> <span class="nc">Individual</span><span class="p">(</span><span class="n">MessageMixin</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">alternate_ids</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">date_of_birth</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Timestamp</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">time_at_last_encounter</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">TimeElement</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">vital_status</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">VitalStatus</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">sex</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Sex</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">karyotypic_sex</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">KaryotypicSex</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">gender</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">OntologyClass</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">taxonomy</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">OntologyClass</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="c1"># TODO: validate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_alt_ids</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="n">alternate_ids</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">alternate_ids</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_date_of_birth</span> <span class="o">=</span> <span class="n">date_of_birth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time_at_last_encounter</span> <span class="o">=</span> <span class="n">time_at_last_encounter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vital_status</span> <span class="o">=</span> <span class="n">vital_status</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sex</span> <span class="o">=</span> <span class="n">sex</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_karyotypic_sex</span> <span class="o">=</span> <span class="n">karyotypic_sex</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gender</span> <span class="o">=</span> <span class="n">gender</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_taxonomy</span> <span class="o">=</span> <span class="n">taxonomy</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">alternate_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">MutableSequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alt_ids</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">date_of_birth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Timestamp</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_date_of_birth</span>
+
+    <span class="nd">@date_of_birth</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">date_of_birth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Timestamp</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_date_of_birth</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@date_of_birth</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">date_of_birth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_date_of_birth</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">time_at_last_encounter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">TimeElement</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_at_last_encounter</span>
+
+    <span class="nd">@time_at_last_encounter</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">time_at_last_encounter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">TimeElement</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time_at_last_encounter</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@time_at_last_encounter</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">time_at_last_encounter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time_at_last_encounter</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vital_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">VitalStatus</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vital_status</span>
+
+    <span class="nd">@vital_status</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">vital_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">VitalStatus</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vital_status</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@vital_status</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">vital_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vital_status</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">sex</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Sex</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sex</span>
+
+    <span class="nd">@sex</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">sex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Sex</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sex</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@sex</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">sex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sex</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">karyotypic_sex</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">KaryotypicSex</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_karyotypic_sex</span>
+
+    <span class="nd">@karyotypic_sex</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">karyotypic_sex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">KaryotypicSex</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_karyotypic_sex</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@karyotypic_sex</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">karyotypic_sex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_karyotypic_sex</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">gender</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">OntologyClass</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gender</span>
+
+    <span class="nd">@gender</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">gender</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">OntologyClass</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gender</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@gender</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">gender</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gender</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">taxonomy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">OntologyClass</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_taxonomy</span>
+
+    <span class="nd">@taxonomy</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">taxonomy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">OntologyClass</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_taxonomy</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@taxonomy</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">taxonomy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_taxonomy</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Individual.field_names">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Individual.field_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">field_names</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;alternate_ids&#39;</span><span class="p">,</span> <span class="s1">&#39;date_of_birth&#39;</span><span class="p">,</span> <span class="s1">&#39;time_at_last_encounter&#39;</span><span class="p">,</span> <span class="s1">&#39;vital_status&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="s1">&#39;karyotypic_sex&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="s1">&#39;taxonomy&#39;</span></div>
+
+
+<div class="viewcode-block" id="Individual.required_fields">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Individual.required_fields">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">required_fields</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span></div>
+
+
+<div class="viewcode-block" id="Individual.from_dict">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Individual.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_all_required_fields_are_present</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Individual</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                <span class="n">alternate_ids</span><span class="o">=</span><span class="n">MessageMixin</span><span class="o">.</span><span class="n">_extract_optional_field</span><span class="p">(</span><span class="s1">&#39;alternate_ids&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">date_of_birth</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;date_of_birth&#39;</span><span class="p">,</span> <span class="n">Timestamp</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">time_at_last_encounter</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;time_at_last_encounter&#39;</span><span class="p">,</span> <span class="n">TimeElement</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">vital_status</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;vital_status&#39;</span><span class="p">,</span> <span class="n">VitalStatus</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">sex</span><span class="o">=</span><span class="n">MessageMixin</span><span class="o">.</span><span class="n">_extract_enum_field</span><span class="p">(</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">Sex</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">karyotypic_sex</span><span class="o">=</span><span class="n">MessageMixin</span><span class="o">.</span><span class="n">_extract_enum_field</span><span class="p">(</span><span class="s1">&#39;karyotypic_sex&#39;</span><span class="p">,</span> <span class="n">KaryotypicSex</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">gender</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">taxonomy</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;taxonomy&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_complain_about_missing_field</span><span class="p">(</span><span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Individual.to_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Individual.to_message">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Individual</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_alt_ids</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">i</span><span class="o">.</span><span class="n">alternate_ids</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_alt_ids</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_date_of_birth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">i</span><span class="o">.</span><span class="n">time_at_last_encounter</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_date_of_birth</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_at_last_encounter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">i</span><span class="o">.</span><span class="n">time_at_last_encounter</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_at_last_encounter</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vital_status</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">i</span><span class="o">.</span><span class="n">vital_status</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vital_status</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sex</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">i</span><span class="o">.</span><span class="n">sex</span> <span class="o">=</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Sex</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sex</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_karyotypic_sex</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">i</span><span class="o">.</span><span class="n">karyotypic_sex</span> <span class="o">=</span> <span class="n">pp202</span><span class="o">.</span><span class="n">KaryotypicSex</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_karyotypic_sex</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gender</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">i</span><span class="o">.</span><span class="n">gender</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gender</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_taxonomy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">i</span><span class="o">.</span><span class="n">taxonomy</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_taxonomy</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">i</span></div>
+
+
+<div class="viewcode-block" id="Individual.message_type">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Individual.message_type">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">message_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Individual</span></div>
+
+
+<div class="viewcode-block" id="Individual.from_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Individual.from_message">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Individual</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Individual</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="n">alternate_ids</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">alternate_ids</span><span class="p">,</span>
+                <span class="n">date_of_birth</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;date_of_birth&#39;</span><span class="p">,</span> <span class="n">Timestamp</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+                <span class="n">time_at_last_encounter</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;time_at_last_encounter&#39;</span><span class="p">,</span> <span class="n">TimeElement</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+                <span class="n">sex</span><span class="o">=</span><span class="n">Sex</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">sex</span><span class="p">),</span>
+                <span class="n">karyotypic_sex</span><span class="o">=</span><span class="n">KaryotypicSex</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">karyotypic_sex</span><span class="p">),</span>
+                <span class="n">vital_status</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;vital_status&#39;</span><span class="p">,</span> <span class="n">VitalStatus</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+                <span class="n">gender</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+                <span class="n">taxonomy</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;taxonomy&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">complain_about_incompatible_msg_type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Individual</span><span class="p">)</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_id</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alt_ids</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_alt_ids</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_date_of_birth</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_date_of_birth</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_at_last_encounter</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_time_at_last_encounter</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sex</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_sex</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_karyotypic_sex</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_karyotypic_sex</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gender</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_gender</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_taxonomy</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_taxonomy</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Individual(id=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="si">}</span><span class="s1">,&#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39; alternate_ids=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_alt_ids</span><span class="si">}</span><span class="s1">,&#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39; date_of_birth=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_date_of_birth</span><span class="si">}</span><span class="s1">,&#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39; time_at_last_encounter=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_at_last_encounter</span><span class="si">}</span><span class="s1">,&#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39; sex=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_sex</span><span class="si">}</span><span class="s1">,&#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39; karyotypic_sex=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_karyotypic_sex</span><span class="si">}</span><span class="s1">,&#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39; gender=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_gender</span><span class="si">}</span><span class="s1">,&#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39; taxonomy=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_taxonomy</span><span class="si">}</span><span class="s1">,&#39;</span> \
+               <span class="s1">&#39;)&#39;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

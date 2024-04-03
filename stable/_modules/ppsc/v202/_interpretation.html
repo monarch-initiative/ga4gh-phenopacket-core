@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ppsc.v202._interpretation &mdash; ppsc 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/ppsc.css?v=a9fa5eb9" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=6dbb43f8"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ppsc
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation &amp; Tutorial</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../apidocs/modules.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ppsc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ppsc.v202._interpretation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ppsc.v202._interpretation</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">enum</span>
+
+<span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">import</span> <span class="nn">phenopackets</span> <span class="k">as</span> <span class="nn">pp202</span>
+<span class="kn">from</span> <span class="nn">google.protobuf.message</span> <span class="kn">import</span> <span class="n">Message</span>
+
+<span class="kn">from</span> <span class="nn">._base</span> <span class="kn">import</span> <span class="n">OntologyClass</span>
+<span class="kn">from</span> <span class="nn">._vrsatile</span> <span class="kn">import</span> <span class="n">VariationDescriptor</span>
+<span class="kn">from</span> <span class="nn">._gene_descriptor</span> <span class="kn">import</span> <span class="n">GeneDescriptor</span>
+<span class="kn">from</span> <span class="nn">.._api</span> <span class="kn">import</span> <span class="n">MessageMixin</span>
+<span class="kn">from</span> <span class="nn">..parse</span> <span class="kn">import</span> <span class="n">extract_message_scalar</span><span class="p">,</span> <span class="n">extract_message_sequence</span><span class="p">,</span> <span class="n">extract_pb_message_scalar</span><span class="p">,</span> <span class="n">extract_pb_message_seq</span>
+<span class="kn">from</span> <span class="nn">..parse</span> <span class="kn">import</span> <span class="n">extract_oneof_scalar</span><span class="p">,</span> <span class="n">extract_pb_oneof_scalar</span>
+
+
+<div class="viewcode-block" id="AcmgPathogenicityClassification">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.AcmgPathogenicityClassification">[docs]</a>
+<span class="k">class</span> <span class="nc">AcmgPathogenicityClassification</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">NOT_PROVIDED</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">BENIGN</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">LIKELY_BENIGN</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">UNCERTAIN_SIGNIFICANCE</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">LIKELY_PATHOGENIC</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">PATHOGENIC</span> <span class="o">=</span> <span class="mi">5</span></div>
+
+
+
+<div class="viewcode-block" id="TherapeuticActionability">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.TherapeuticActionability">[docs]</a>
+<span class="k">class</span> <span class="nc">TherapeuticActionability</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">UNKNOWN_ACTIONABILITY</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">NOT_ACTIONABLE</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">ACTIONABLE</span> <span class="o">=</span> <span class="mi">2</span></div>
+
+
+
+<div class="viewcode-block" id="VariantInterpretation">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.VariantInterpretation">[docs]</a>
+<span class="k">class</span> <span class="nc">VariantInterpretation</span><span class="p">(</span><span class="n">MessageMixin</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">acmg_pathogenicity_classification</span><span class="p">:</span> <span class="n">AcmgPathogenicityClassification</span><span class="p">,</span>
+            <span class="n">therapeutic_actionability</span><span class="p">:</span> <span class="n">TherapeuticActionability</span><span class="p">,</span>
+            <span class="n">variation_descriptor</span><span class="p">:</span> <span class="n">VariationDescriptor</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_acmg_pathogenicity_classification</span> <span class="o">=</span> <span class="n">acmg_pathogenicity_classification</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_therapeutic_actionability</span> <span class="o">=</span> <span class="n">therapeutic_actionability</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_variation_descriptor</span> <span class="o">=</span> <span class="n">variation_descriptor</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">acmg_pathogenicity_classification</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AcmgPathogenicityClassification</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acmg_pathogenicity_classification</span>
+
+    <span class="nd">@acmg_pathogenicity_classification</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">acmg_pathogenicity_classification</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">AcmgPathogenicityClassification</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_acmg_pathogenicity_classification</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">therapeutic_actionability</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TherapeuticActionability</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_therapeutic_actionability</span>
+
+    <span class="nd">@therapeutic_actionability</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">therapeutic_actionability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">TherapeuticActionability</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_therapeutic_actionability</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">variation_descriptor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VariationDescriptor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_variation_descriptor</span>
+
+    <span class="nd">@variation_descriptor</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">variation_descriptor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">VariationDescriptor</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_variation_descriptor</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="VariantInterpretation.field_names">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.VariantInterpretation.field_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">field_names</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;acmg_pathogenicity_classification&#39;</span><span class="p">,</span> <span class="s1">&#39;therapeutic_actionability&#39;</span><span class="p">,</span> <span class="s1">&#39;variation_descriptor&#39;</span></div>
+
+
+<div class="viewcode-block" id="VariantInterpretation.required_fields">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.VariantInterpretation.required_fields">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">required_fields</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;acmg_pathogenicity_classification&#39;</span><span class="p">,</span> <span class="s1">&#39;therapeutic_actionability&#39;</span><span class="p">,</span> <span class="s1">&#39;variation_descriptor&#39;</span></div>
+
+
+<div class="viewcode-block" id="VariantInterpretation.from_dict">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.VariantInterpretation.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_all_required_fields_are_present</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">VariantInterpretation</span><span class="p">(</span>
+                <span class="n">acmg_pathogenicity_classification</span><span class="o">=</span><span class="n">MessageMixin</span><span class="o">.</span><span class="n">_extract_enum_field</span><span class="p">(</span>
+                    <span class="s1">&#39;acmg_pathogenicity_classification&#39;</span><span class="p">,</span> <span class="n">AcmgPathogenicityClassification</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">therapeutic_actionability</span><span class="o">=</span><span class="n">MessageMixin</span><span class="o">.</span><span class="n">_extract_enum_field</span><span class="p">(</span>
+                    <span class="s1">&#39;therapeutic_actionability&#39;</span><span class="p">,</span> <span class="n">TherapeuticActionability</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">variation_descriptor</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;variation_descriptor&#39;</span><span class="p">,</span> <span class="n">VariationDescriptor</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_complain_about_missing_field</span><span class="p">(</span><span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VariantInterpretation.to_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.VariantInterpretation.to_message">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">VariantInterpretation</span><span class="p">(</span>
+            <span class="n">acmg_pathogenicity_classification</span><span class="o">=</span><span class="n">pp202</span><span class="o">.</span><span class="n">AcmgPathogenicityClassification</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_acmg_pathogenicity_classification</span><span class="o">.</span><span class="n">name</span>
+            <span class="p">),</span>
+            <span class="n">therapeutic_actionability</span><span class="o">=</span><span class="n">pp202</span><span class="o">.</span><span class="n">TherapeuticActionability</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_therapeutic_actionability</span><span class="o">.</span><span class="n">name</span>
+            <span class="p">),</span>
+            <span class="n">variation_descriptor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_variation_descriptor</span><span class="o">.</span><span class="n">to_message</span><span class="p">(),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VariantInterpretation.message_type">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.VariantInterpretation.message_type">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">message_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">VariantInterpretation</span></div>
+
+
+<div class="viewcode-block" id="VariantInterpretation.from_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.VariantInterpretation.from_message">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">pp202</span><span class="o">.</span><span class="n">VariantInterpretation</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">VariantInterpretation</span><span class="p">(</span>
+                <span class="n">acmg_pathogenicity_classification</span><span class="o">=</span><span class="n">AcmgPathogenicityClassification</span><span class="p">(</span>
+                    <span class="n">msg</span><span class="o">.</span><span class="n">acmg_pathogenicity_classification</span><span class="p">),</span>
+                <span class="n">therapeutic_actionability</span><span class="o">=</span><span class="n">TherapeuticActionability</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">therapeutic_actionability</span><span class="p">),</span>
+                <span class="n">variation_descriptor</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;variation_descriptor&#39;</span><span class="p">,</span> <span class="n">VariationDescriptor</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">complain_about_incompatible_msg_type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">VariantInterpretation</span><span class="p">)</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acmg_pathogenicity_classification</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_acmg_pathogenicity_classification</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_therapeutic_actionability</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_therapeutic_actionability</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_variation_descriptor</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_variation_descriptor</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;VariantInterpretation(acmg_pathogenicity_classification=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_acmg_pathogenicity_classification</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;therapeutic_actionability=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_therapeutic_actionability</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;variation_descriptor=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_variation_descriptor</span><span class="si">}</span><span class="s1">)&#39;</span></div>
+
+
+
+<div class="viewcode-block" id="GenomicInterpretation">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.GenomicInterpretation">[docs]</a>
+<span class="k">class</span> <span class="nc">GenomicInterpretation</span><span class="p">(</span><span class="n">MessageMixin</span><span class="p">):</span>
+    <span class="n">_ONEOF_CALL</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;gene_descriptor&#39;</span><span class="p">:</span> <span class="n">GeneDescriptor</span><span class="p">,</span>
+        <span class="s1">&#39;variant_interpretation&#39;</span><span class="p">:</span> <span class="n">VariantInterpretation</span><span class="p">,</span>
+    <span class="p">}</span>
+
+<div class="viewcode-block" id="GenomicInterpretation.InterpretationStatus">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.GenomicInterpretation.InterpretationStatus">[docs]</a>
+    <span class="k">class</span> <span class="nc">InterpretationStatus</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+        <span class="n">UNKNOWN_STATUS</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">REJECTED</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">CANDIDATE</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">CONTRIBUTORY</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">CAUSATIVE</span> <span class="o">=</span> <span class="mi">4</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">subject_or_biosample_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">interpretation_status</span><span class="p">:</span> <span class="n">InterpretationStatus</span><span class="p">,</span>
+            <span class="n">call</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">GeneDescriptor</span><span class="p">,</span> <span class="n">VariantInterpretation</span><span class="p">],</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_subject_or_biosample_id</span> <span class="o">=</span> <span class="n">subject_or_biosample_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_interpretation_status</span> <span class="o">=</span> <span class="n">interpretation_status</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_call</span> <span class="o">=</span> <span class="n">call</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">subject_or_biosample_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subject_or_biosample_id</span>
+
+    <span class="nd">@subject_or_biosample_id</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">subject_or_biosample_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_subject_or_biosample_id</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">interpretation_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InterpretationStatus</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpretation_status</span>
+
+    <span class="nd">@interpretation_status</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">interpretation_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">InterpretationStatus</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_interpretation_status</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">GeneDescriptor</span><span class="p">,</span> <span class="n">VariantInterpretation</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">gene_descriptor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">GeneDescriptor</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">,</span> <span class="n">GeneDescriptor</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="nd">@gene_descriptor</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">gene_descriptor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">GeneDescriptor</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_call</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">variant_interpretation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">VariantInterpretation</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">,</span> <span class="n">VariantInterpretation</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="nd">@variant_interpretation</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">variant_interpretation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">VariantInterpretation</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_call</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="GenomicInterpretation.field_names">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.GenomicInterpretation.field_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">field_names</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;subject_or_biosample_id&#39;</span><span class="p">,</span> <span class="s1">&#39;interpretation_status&#39;</span><span class="p">,</span> <span class="s1">&#39;gene_descriptor&#39;</span><span class="p">,</span> <span class="s1">&#39;variant_interpretation&#39;</span></div>
+
+
+<div class="viewcode-block" id="GenomicInterpretation.required_fields">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.GenomicInterpretation.required_fields">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">required_fields</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Should not be called!&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GenomicInterpretation.from_dict">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.GenomicInterpretation.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="s1">&#39;subject_or_biosample_id&#39;</span> <span class="ow">in</span> <span class="n">values</span> \
+                <span class="ow">and</span> <span class="s1">&#39;interpretation_status&#39;</span> <span class="ow">in</span> <span class="n">values</span> \
+                <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">field</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_ONEOF_CALL</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">GenomicInterpretation</span><span class="p">(</span>
+                <span class="n">subject_or_biosample_id</span><span class="o">=</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;subject_or_biosample_id&#39;</span><span class="p">],</span>
+                <span class="n">interpretation_status</span><span class="o">=</span><span class="n">MessageMixin</span><span class="o">.</span><span class="n">_extract_enum_field</span><span class="p">(</span>
+                    <span class="s1">&#39;interpretation_status&#39;</span><span class="p">,</span> <span class="n">GenomicInterpretation</span><span class="o">.</span><span class="n">InterpretationStatus</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">call</span><span class="o">=</span><span class="n">extract_oneof_scalar</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_ONEOF_CALL</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;Missing one of required fields: &#39;</span>
+                <span class="sa">f</span><span class="s1">&#39;`subject_or_biosample_id, interpretation_status, gene_descriptor|variant_interpretation` in </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GenomicInterpretation.to_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.GenomicInterpretation.to_message">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">pp202</span><span class="o">.</span><span class="n">GenomicInterpretation</span><span class="p">(</span>
+            <span class="n">subject_or_biosample_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_subject_or_biosample_id</span><span class="p">,</span>
+            <span class="n">interpretation_status</span><span class="o">=</span><span class="n">pp202</span><span class="o">.</span><span class="n">GenomicInterpretation</span><span class="o">.</span><span class="n">InterpretationStatus</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_interpretation_status</span><span class="o">.</span><span class="n">name</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">,</span> <span class="n">GeneDescriptor</span><span class="p">):</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">gene_descriptor</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">,</span> <span class="n">VariantInterpretation</span><span class="p">):</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">variant_interpretation</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Bug&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="GenomicInterpretation.message_type">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.GenomicInterpretation.message_type">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">message_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">GenomicInterpretation</span></div>
+
+
+<div class="viewcode-block" id="GenomicInterpretation.from_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.GenomicInterpretation.from_message">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">message_type</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="n">GenomicInterpretation</span><span class="p">(</span>
+                <span class="n">subject_or_biosample_id</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">subject_or_biosample_id</span><span class="p">,</span>
+                <span class="n">interpretation_status</span><span class="o">=</span><span class="n">GenomicInterpretation</span><span class="o">.</span><span class="n">InterpretationStatus</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">interpretation_status</span><span class="p">),</span>
+                <span class="n">call</span><span class="o">=</span><span class="n">extract_pb_oneof_scalar</span><span class="p">(</span><span class="s1">&#39;call&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_ONEOF_CALL</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">complain_about_incompatible_msg_type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">GenomicInterpretation</span><span class="p">)</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subject_or_biosample_id</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_subject_or_biosample_id</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpretation_status</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_interpretation_status</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_call</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;GenomicInterpretation(&#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;subject_or_biosample_id=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_subject_or_biosample_id</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;interpretation_status=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_interpretation_status</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;call=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="si">}</span><span class="s1">)&#39;</span></div>
+
+
+
+<div class="viewcode-block" id="Diagnosis">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Diagnosis">[docs]</a>
+<span class="k">class</span> <span class="nc">Diagnosis</span><span class="p">(</span><span class="n">MessageMixin</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">disease</span><span class="p">:</span> <span class="n">OntologyClass</span><span class="p">,</span>
+            <span class="n">genomic_interpretations</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">GenomicInterpretation</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_disease</span> <span class="o">=</span> <span class="n">disease</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_genomic_interpretations</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="n">genomic_interpretations</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">genomic_interpretations</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">disease</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OntologyClass</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disease</span>
+
+    <span class="nd">@disease</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">disease</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">OntologyClass</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_disease</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">genomic_interpretations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">MutableSequence</span><span class="p">[</span><span class="n">GenomicInterpretation</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_genomic_interpretations</span>
+
+<div class="viewcode-block" id="Diagnosis.field_names">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Diagnosis.field_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">field_names</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;disease&#39;</span><span class="p">,</span> <span class="s1">&#39;genomic_interpretations&#39;</span></div>
+
+
+<div class="viewcode-block" id="Diagnosis.required_fields">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Diagnosis.required_fields">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">required_fields</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;disease&#39;</span><span class="p">,</span></div>
+
+
+<div class="viewcode-block" id="Diagnosis.from_dict">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Diagnosis.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_all_required_fields_are_present</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Diagnosis</span><span class="p">(</span>
+                <span class="n">disease</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;disease&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">genomic_interpretations</span><span class="o">=</span><span class="n">extract_message_sequence</span><span class="p">(</span>
+                    <span class="s1">&#39;genomic_interpretations&#39;</span><span class="p">,</span> <span class="n">GenomicInterpretation</span><span class="p">,</span> <span class="n">values</span>
+                <span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_complain_about_missing_field</span><span class="p">(</span><span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Diagnosis.to_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Diagnosis.to_message">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Diagnosis</span><span class="p">(</span>
+            <span class="n">disease</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_disease</span><span class="o">.</span><span class="n">to_message</span><span class="p">(),</span>
+            <span class="n">genomic_interpretations</span><span class="o">=</span><span class="p">(</span><span class="n">gi</span><span class="o">.</span><span class="n">to_message</span><span class="p">()</span> <span class="k">for</span> <span class="n">gi</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_genomic_interpretations</span><span class="p">),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Diagnosis.message_type">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Diagnosis.message_type">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">message_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Diagnosis</span></div>
+
+
+<div class="viewcode-block" id="Diagnosis.from_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Diagnosis.from_message">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Diagnosis</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Diagnosis</span><span class="p">(</span>
+                <span class="n">disease</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;disease&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+                <span class="n">genomic_interpretations</span><span class="o">=</span><span class="n">extract_pb_message_seq</span><span class="p">(</span><span class="s1">&#39;genomic_interpretations&#39;</span><span class="p">,</span> <span class="n">GenomicInterpretation</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">complain_about_incompatible_msg_type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Diagnosis</span><span class="p">)</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disease</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_disease</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_genomic_interpretations</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_genomic_interpretations</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Diagnosis(&#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;disease=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_disease</span><span class="si">}</span><span class="s1">&#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;genomic_interpretations=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_genomic_interpretations</span><span class="si">}</span><span class="s1">)&#39;</span></div>
+
+
+
+<div class="viewcode-block" id="Interpretation">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Interpretation">[docs]</a>
+<span class="k">class</span> <span class="nc">Interpretation</span><span class="p">(</span><span class="n">MessageMixin</span><span class="p">):</span>
+<div class="viewcode-block" id="Interpretation.ProgressStatus">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Interpretation.ProgressStatus">[docs]</a>
+    <span class="k">class</span> <span class="nc">ProgressStatus</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+        <span class="n">UNKNOWN_PROGRESS</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">IN_PROGRESS</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">COMPLETED</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">SOLVED</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">UNSOLVED</span> <span class="o">=</span> <span class="mi">4</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">progress_status</span><span class="p">:</span> <span class="n">ProgressStatus</span><span class="p">,</span>
+            <span class="n">diagnosis</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Diagnosis</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">summary</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_progress_status</span> <span class="o">=</span> <span class="n">progress_status</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_diagnosis</span> <span class="o">=</span> <span class="n">diagnosis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_summary</span> <span class="o">=</span> <span class="n">summary</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id</span>
+
+    <span class="nd">@id</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_id</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">progress_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ProgressStatus</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_progress_status</span>
+
+    <span class="nd">@progress_status</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">progress_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">ProgressStatus</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_progress_status</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">diagnosis</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Diagnosis</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_diagnosis</span>
+
+    <span class="nd">@diagnosis</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">diagnosis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Diagnosis</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_diagnosis</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@diagnosis</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">diagnosis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_diagnosis</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_summary</span>
+
+    <span class="nd">@summary</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_summary</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@summary</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_summary</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Interpretation.field_names">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Interpretation.field_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">field_names</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;progress_status&#39;</span><span class="p">,</span> <span class="s1">&#39;diagnosis&#39;</span><span class="p">,</span> <span class="s1">&#39;summary&#39;</span></div>
+
+
+<div class="viewcode-block" id="Interpretation.required_fields">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Interpretation.required_fields">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">required_fields</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;progress_status&#39;</span><span class="p">,</span></div>
+
+
+<div class="viewcode-block" id="Interpretation.from_dict">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Interpretation.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_all_required_fields_are_present</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Interpretation</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                <span class="n">progress_status</span><span class="o">=</span><span class="n">MessageMixin</span><span class="o">.</span><span class="n">_extract_enum_field</span><span class="p">(</span><span class="s1">&#39;progress_status&#39;</span><span class="p">,</span> <span class="n">Interpretation</span><span class="o">.</span><span class="n">ProgressStatus</span><span class="p">,</span>
+                                                                 <span class="n">values</span><span class="p">),</span>
+                <span class="n">diagnosis</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">,</span> <span class="n">Diagnosis</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">summary</span><span class="o">=</span><span class="n">MessageMixin</span><span class="o">.</span><span class="n">_extract_optional_field</span><span class="p">(</span><span class="s1">&#39;summary&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_complain_about_missing_field</span><span class="p">(</span><span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Interpretation.to_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Interpretation.to_message">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Interpretation</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="p">,</span>
+            <span class="n">progress_status</span><span class="o">=</span><span class="n">pp202</span><span class="o">.</span><span class="n">Interpretation</span><span class="o">.</span><span class="n">ProgressStatus</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_progress_status</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_diagnosis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">i</span><span class="o">.</span><span class="n">diagnosis</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_diagnosis</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_summary</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">i</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_summary</span>
+
+        <span class="k">return</span> <span class="n">i</span></div>
+
+
+<div class="viewcode-block" id="Interpretation.message_type">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Interpretation.message_type">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">message_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Interpretation</span></div>
+
+
+<div class="viewcode-block" id="Interpretation.from_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Interpretation.from_message">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Interpretation</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Interpretation</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="n">progress_status</span><span class="o">=</span><span class="n">Interpretation</span><span class="o">.</span><span class="n">ProgressStatus</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">progress_status</span><span class="p">),</span>
+                <span class="n">diagnosis</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">,</span> <span class="n">Diagnosis</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+                <span class="n">summary</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">summary</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="k">else</span> <span class="n">msg</span><span class="o">.</span><span class="n">summary</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">complain_about_incompatible_msg_type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Interpretation</span><span class="p">)</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_id</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_progress_status</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_progress_status</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_diagnosis</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_diagnosis</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_summary</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_summary</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Interpretation(&#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;id=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;progress_status=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_progress_status</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;diagnosis=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_diagnosis</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;summary=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_summary</span><span class="si">}</span><span class="s1">)&#39;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

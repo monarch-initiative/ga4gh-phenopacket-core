@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ppsc._timestamp &mdash; ppsc 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ppsc.css?v=a9fa5eb9" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=6dbb43f8"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ppsc
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation &amp; Tutorial</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apidocs/modules.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ppsc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ppsc._timestamp</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ppsc._timestamp</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
+
+<span class="kn">from</span> <span class="nn">google.protobuf.message</span> <span class="kn">import</span> <span class="n">Message</span>
+<span class="kn">from</span> <span class="nn">google.protobuf.timestamp_pb2</span> <span class="kn">import</span> <span class="n">Timestamp</span> <span class="k">as</span> <span class="n">PbTimestamp</span>
+
+<span class="kn">from</span> <span class="nn">.parse</span> <span class="kn">import</span> <span class="n">ToProtobuf</span><span class="p">,</span> <span class="n">FromProtobuf</span>
+
+
+<div class="viewcode-block" id="Timestamp">
+<a class="viewcode-back" href="../../apidocs/ppsc.v202.html#ppsc.Timestamp">[docs]</a>
+<span class="k">class</span> <span class="nc">Timestamp</span><span class="p">(</span><span class="n">ToProtobuf</span><span class="p">,</span> <span class="n">FromProtobuf</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This `Timestamp` implementation is functionally equivalent to protobuf&#39;s timestamp.</span>
+
+<span class="sd">    Per protobuf API documentation, *A Timestamp represents a point in time</span>
+<span class="sd">    independent of any time zone or local calendar, encoded as a count of seconds</span>
+<span class="sd">    and fractions of seconds at nanosecond resolution.</span>
+<span class="sd">    The count is relative to an epoch at UTC midnight on January 1, 1970,</span>
+<span class="sd">    in the proleptic Gregorian calendar which extends the Gregorian calendar</span>
+<span class="sd">    backwards to year one.*</span>
+
+<span class="sd">    Consult the `Phenopacket Schema &lt;https://phenopacket-schema.readthedocs.io/en/latest/timestamp.html&gt;`_ documentation</span>
+<span class="sd">    for more information.</span>
+
+<span class="sd">    **Examples**</span>
+
+<span class="sd">    Here we show how to create a `Timestamp` from various inputs.</span>
+
+<span class="sd">    &gt;&gt;&gt; from ppsc import Timestamp</span>
+
+<span class="sd">    Let&#39;s create a timestamp from a date time string:</span>
+
+<span class="sd">    &gt;&gt;&gt; ts = Timestamp.from_str(&#39;1970-01-01T00:00:30Z&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; ts.seconds, ts.nanos</span>
+<span class="sd">    (30, 0)</span>
+
+<span class="sd">    Note, we indicate that the timestamp is in UTC by adding `Z` suffix.</span>
+
+<span class="sd">    We can also create a timestamp from a local time.</span>
+<span class="sd">    Let&#39;s create the same `Timestamp` but now in Eastern Daylight Time (EDT)</span>
+<span class="sd">    which is 4 hours behind UTC:</span>
+
+<span class="sd">    &gt;&gt;&gt; ts_local = Timestamp.from_str(&#39;1969-12-31T20:00:30-04:00&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; ts_local == ts</span>
+<span class="sd">    True</span>
+
+<span class="sd">    We can also create timestamp from a datetime object:</span>
+
+<span class="sd">    &gt;&gt;&gt; from datetime import datetime, date, time, timezone</span>
+<span class="sd">    &gt;&gt;&gt; d = date(1970, 1, 1)</span>
+<span class="sd">    &gt;&gt;&gt; t = time(0, 0, 30)</span>
+<span class="sd">    &gt;&gt;&gt; dt = datetime.combine(d, t, tzinfo=timezone.utc)</span>
+<span class="sd">    &gt;&gt;&gt; ts_dt = Timestamp.from_datetime(dt)</span>
+<span class="sd">    &gt;&gt;&gt; ts_dt == ts</span>
+<span class="sd">    True</span>
+
+<span class="sd">    Last, we can create timestamp directly from seconds and nanoseconds:</span>
+
+<span class="sd">    &gt;&gt;&gt; ts_raw = Timestamp(30, 0)</span>
+<span class="sd">    &gt;&gt;&gt; ts_raw == ts</span>
+<span class="sd">    True</span>
+
+<span class="sd">    and we can convert the timestamp to a UTC date time string:</span>
+
+<span class="sd">    &gt;&gt;&gt; ts_raw.as_str()</span>
+<span class="sd">    &#39;1970-01-01T00:00:30Z&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">seconds</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">nanos</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="c1"># Seconds can be positive or negative,</span>
+        <span class="c1"># The negative seconds represent the timestamps prior the UNIX epoch.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_seconds</span> <span class="o">=</span> <span class="n">seconds</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nanos</span> <span class="o">=</span> <span class="n">nanos</span>  <span class="c1"># TODO: check that nanos is a positive `int`</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">seconds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_seconds</span>
+
+    <span class="nd">@seconds</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">seconds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_seconds</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nanos</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nanos</span>
+
+    <span class="nd">@nanos</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">nanos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nanos</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="Timestamp.as_datetime">
+<a class="viewcode-back" href="../../apidocs/ppsc.v202.html#ppsc.Timestamp.as_datetime">[docs]</a>
+    <span class="k">def</span> <span class="nf">as_datetime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert timestamp into Python&#39;s datetime object.</span>
+
+<span class="sd">        The datetime is always in UTC.</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; from ppsc import Timestamp</span>
+<span class="sd">        &gt;&gt;&gt; ts = Timestamp(10, 500)</span>
+<span class="sd">        &gt;&gt;&gt; dt = ts.as_datetime()</span>
+
+<span class="sd">        Now we can access the datetime components:</span>
+
+<span class="sd">        &gt;&gt;&gt; dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second</span>
+<span class="sd">        (1970, 1, 1, 0, 0, 10)</span>
+
+<span class="sd">        including the time zone:</span>
+
+<span class="sd">        &gt;&gt;&gt; dt.tzname()</span>
+<span class="sd">        &#39;UTC&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_seconds</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nanos</span> <span class="o">/</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">9</span><span class="p">),</span> <span class="n">tz</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Timestamp.as_str">
+<a class="viewcode-back" href="../../apidocs/ppsc.v202.html#ppsc.Timestamp.as_str">[docs]</a>
+    <span class="k">def</span> <span class="nf">as_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%SZ&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert timestamp into a date time string.</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; from ppsc import Timestamp</span>
+<span class="sd">        &gt;&gt;&gt; ts = Timestamp(0, 500_000)</span>
+<span class="sd">        &gt;&gt;&gt; ts.as_str()</span>
+<span class="sd">        &#39;1970-01-01T00:00:00Z&#39;</span>
+
+<span class="sd">        We can use different formatting:</span>
+
+<span class="sd">        &gt;&gt;&gt; ts.as_str(&#39;%Y-%m-%dT%H:%M:%S.%f%Z&#39;)</span>
+<span class="sd">        &#39;1970-01-01T00:00:00.000500UTC&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_datetime</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Timestamp.from_str">
+<a class="viewcode-back" href="../../apidocs/ppsc.v202.html#ppsc.Timestamp.from_str">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_str</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S%z&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create `Timestamp` from a date time string.</span>
+
+<span class="sd">        :param val: the date time `str`.</span>
+<span class="sd">        :param fmt: the date time format string.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Timestamp</span><span class="o">.</span><span class="n">from_datetime</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Timestamp.from_datetime">
+<a class="viewcode-back" href="../../apidocs/ppsc.v202.html#ppsc.Timestamp.from_datetime">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_datetime</span><span class="p">(</span><span class="n">dt</span><span class="p">:</span> <span class="n">datetime</span><span class="p">):</span>
+        <span class="n">fractional</span><span class="p">,</span> <span class="n">integral</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">modf</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">timestamp</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">Timestamp</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">integral</span><span class="p">),</span> <span class="n">nanos</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">fractional</span> <span class="o">*</span> <span class="mi">1_000_000</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Timestamp.to_message">
+<a class="viewcode-back" href="../../apidocs/ppsc.v202.html#ppsc.Timestamp.to_message">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">PbTimestamp</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_seconds</span><span class="p">,</span> <span class="n">nanos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_nanos</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Timestamp.message_type">
+<a class="viewcode-back" href="../../apidocs/ppsc.v202.html#ppsc.Timestamp.message_type">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">message_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">PbTimestamp</span></div>
+
+
+<div class="viewcode-block" id="Timestamp.from_message">
+<a class="viewcode-back" href="../../apidocs/ppsc.v202.html#ppsc.Timestamp.from_message">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">PbTimestamp</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Timestamp</span><span class="p">(</span>
+                <span class="n">seconds</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">seconds</span><span class="p">,</span>
+                <span class="n">nanos</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">nanos</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">complain_about_incompatible_msg_type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Timestamp</span><span class="p">)</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_seconds</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_seconds</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nanos</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_nanos</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Timestamp(seconds=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_seconds</span><span class="si">}</span><span class="s1">, nanos=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_nanos</span><span class="si">}</span><span class="s1">)&#39;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

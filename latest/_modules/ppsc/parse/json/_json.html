@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ppsc.parse.json._json &mdash; ppsc 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/ppsc.css?v=a9fa5eb9" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=6dbb43f8"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            ppsc
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation &amp; Tutorial</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../apidocs/modules.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ppsc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ppsc.parse.json._json</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ppsc.parse.json._json</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">from</span> <span class="nn">.._io</span> <span class="kn">import</span> <span class="n">Serializer</span><span class="p">,</span> <span class="n">Serializable</span><span class="p">,</span> <span class="n">Deserializer</span><span class="p">,</span> <span class="n">D</span>
+<span class="kn">from</span> <span class="nn">.._util</span> <span class="kn">import</span> <span class="n">CaseConverter</span><span class="p">,</span> <span class="n">HierarchicalKeyMapper</span>
+
+<span class="n">_PRIMITIVES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">map_dict_keys_case</span><span class="p">(</span>
+        <span class="n">func</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">vals</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span> <span class="ow">in</span> <span class="n">_PRIMITIVES</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">vals</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">vals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">new_key</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="ow">in</span> <span class="n">_PRIMITIVES</span><span class="p">:</span>
+                <span class="n">new_val</span> <span class="o">=</span> <span class="n">val</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">):</span>
+                <span class="n">new_val</span> <span class="o">=</span> <span class="p">[</span><span class="n">map_dict_keys_case</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">val</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">):</span>
+                <span class="n">new_val</span> <span class="o">=</span> <span class="n">map_dict_keys_case</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_val</span> <span class="o">=</span> <span class="n">val</span>
+
+            <span class="n">out</span><span class="p">[</span><span class="n">new_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_val</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Bug&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="JsonSerializer">
+<a class="viewcode-back" href="../../../../apidocs/ppsc.parse.json.html#ppsc.parse.json.JsonSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">JsonSerializer</span><span class="p">(</span><span class="n">Serializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A serializer to format :class:`Serializable` objects into JSON format.</span>
+
+<span class="sd">    The serializer will convert the field names from snake case used in Python into camel case</span>
+<span class="sd">    (e.g. `file_attributes` -&gt; `fileAttributes`).</span>
+<span class="sd">    For the purpose of working with Phenopacket Schema, the serializer will not convert the map keys,</span>
+<span class="sd">    (e.g. keys of `file_attributes` map).</span>
+
+<span class="sd">    See :func:`json.dump` for the accepted keyword arguments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_case_converter</span> <span class="o">=</span> <span class="n">CaseConverter</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_key_mapper</span> <span class="o">=</span> <span class="n">HierarchicalKeyMapper</span><span class="o">.</span><span class="n">ps_v202_mapper</span><span class="p">()</span>
+
+<div class="viewcode-block" id="JsonSerializer.serialize">
+<a class="viewcode-back" href="../../../../apidocs/ppsc.parse.json.html#ppsc.parse.json.JsonSerializer.serialize">[docs]</a>
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="n">Serializable</span><span class="p">,</span> <span class="n">fp</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">IO</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">val</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="n">mapped</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_key_mapper</span><span class="o">.</span><span class="n">remap_mapping</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_case_converter</span><span class="o">.</span><span class="n">snake_to_camel</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">mapped</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="JsonDeserializer">
+<a class="viewcode-back" href="../../../../apidocs/ppsc.parse.json.html#ppsc.parse.json.JsonDeserializer">[docs]</a>
+<span class="k">class</span> <span class="nc">JsonDeserializer</span><span class="p">(</span><span class="n">Deserializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A deserializer to load :class:`Deserializable` objects from JSON format.</span>
+
+<span class="sd">    The deserializer supports reading a JSON with keys</span>
+<span class="sd">    in both *snake case* (e.g. `file_attributes`) and *camel case* (e.g. `fileAttributes`).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_case_converter</span> <span class="o">=</span> <span class="n">CaseConverter</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_key_mapper</span> <span class="o">=</span> <span class="n">HierarchicalKeyMapper</span><span class="o">.</span><span class="n">ps_v202_mapper</span><span class="p">()</span>
+
+<div class="viewcode-block" id="JsonDeserializer.deserialize">
+<a class="viewcode-back" href="../../../../apidocs/ppsc.parse.json.html#ppsc.parse.json.JsonDeserializer.deserialize">[docs]</a>
+    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">fp</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">TextIOBase</span><span class="p">],</span>
+            <span class="n">clz</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">D</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">D</span><span class="p">:</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decode_json_content</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+        <span class="n">mapped</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_key_mapper</span><span class="o">.</span><span class="n">remap_mapping</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_case_converter</span><span class="o">.</span><span class="n">camel_to_snake</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">clz</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">mapped</span><span class="p">)</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_decode_json_content</span><span class="p">(</span><span class="n">fp</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">TextIOBase</span><span class="p">]):</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">TextIOBase</span><span class="p">):</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;`fp` must be a `str` or `io.TextIOBase` but was </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">val</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

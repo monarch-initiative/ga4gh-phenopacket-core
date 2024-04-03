@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ppsc package &mdash; ppsc 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/ppsc.css?v=a9fa5eb9" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=6dbb43f8"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ppsc.parse package" href="ppsc.parse.html" />
+    <link rel="prev" title="API reference" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ppsc
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation &amp; Tutorial</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Setup</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ppsc package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-phenopacket-programatically">Create phenopacket programatically</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#read-write-json-and-protobuf">Read/write JSON and Protobuf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ppsc.Timestamp"><code class="docutils literal notranslate"><span class="pre">Timestamp</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ppsc.Timestamp.seconds"><code class="docutils literal notranslate"><span class="pre">Timestamp.seconds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ppsc.Timestamp.nanos"><code class="docutils literal notranslate"><span class="pre">Timestamp.nanos</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ppsc.Timestamp.as_datetime"><code class="docutils literal notranslate"><span class="pre">Timestamp.as_datetime()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ppsc.Timestamp.as_str"><code class="docutils literal notranslate"><span class="pre">Timestamp.as_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ppsc.Timestamp.from_str"><code class="docutils literal notranslate"><span class="pre">Timestamp.from_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ppsc.Timestamp.from_datetime"><code class="docutils literal notranslate"><span class="pre">Timestamp.from_datetime()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ppsc.Timestamp.to_message"><code class="docutils literal notranslate"><span class="pre">Timestamp.to_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ppsc.Timestamp.message_type"><code class="docutils literal notranslate"><span class="pre">Timestamp.message_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ppsc.Timestamp.from_message"><code class="docutils literal notranslate"><span class="pre">Timestamp.from_message()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ppsc.parse.html">ppsc.parse package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ppsc.v202.html">ppsc.v202 package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ppsc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">API reference</a></li>
+      <li class="breadcrumb-item active">ppsc package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/apidocs/ppsc.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ppsc">
+<span id="ppsc-package"></span><h1>ppsc package<a class="headerlink" href="#module-ppsc" title="Link to this heading"></a></h1>
+<p>GA4GH Phenopacket Core is a library with wrapper classes and convenience methods for working with Phenopacket Schema.</p>
+<p>The library simplifies handling of the building blocks Phenopacket Schema by providing typing information
+to empower IDEs.</p>
+<p>The usage is best illustrated on a set of examples.</p>
+<section id="create-phenopacket-programatically">
+<h2>Create phenopacket programatically<a class="headerlink" href="#create-phenopacket-programatically" title="Link to this heading"></a></h2>
+<p>We recommend to bring the classes into scope all at once using the import star:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ppsc.v202</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>Then, we can build a phenopacket from the individual building blocks.</p>
+<p>Let’s start with the subject:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">subject</span> <span class="o">=</span> <span class="n">Individual</span><span class="p">(</span>
+<span class="gp">... </span>  <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;proband A&#39;</span><span class="p">,</span>
+<span class="gp">... </span>  <span class="n">time_at_last_encounter</span><span class="o">=</span><span class="n">TimeElement</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">element</span><span class="o">=</span><span class="n">Age</span><span class="p">(</span><span class="n">iso8601duration</span><span class="o">=</span><span class="s1">&#39;P6M&#39;</span><span class="p">),</span>
+<span class="gp">... </span>  <span class="p">),</span>
+<span class="gp">... </span>  <span class="n">sex</span><span class="o">=</span><span class="n">Sex</span><span class="o">.</span><span class="n">FEMALE</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subject</span><span class="o">.</span><span class="n">id</span>
+<span class="go">&#39;proband A&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subject</span><span class="o">.</span><span class="n">sex</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;FEMALE&#39;</span>
+</pre></div>
+</div>
+<p>The created subject represents a female proband who had 6 months at the time of the last encounter.</p>
+<p>We can update the fields using a simple assignment:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">subject</span><span class="o">.</span><span class="n">karyotypic_sex</span> <span class="o">=</span> <span class="n">KaryotypicSex</span><span class="o">.</span><span class="n">XX</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subject</span><span class="o">.</span><span class="n">karyotypic_sex</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;XX&#39;</span>
+</pre></div>
+</div>
+<p>We assigned an enum constant <cite>KaryotypicSex.XX</cite> to  previously unset <cite>karyotypic_sex</cite> attribute.</p>
+<p>The same can be done with object attributes:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">subject</span><span class="o">.</span><span class="n">vital_status</span> <span class="o">=</span> <span class="n">VitalStatus</span><span class="p">(</span>
+<span class="gp">... </span>  <span class="n">status</span><span class="o">=</span><span class="n">VitalStatus</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">DECEASED</span><span class="p">,</span>
+<span class="gp">... </span>  <span class="n">time_of_death</span><span class="o">=</span><span class="n">TimeElement</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">element</span><span class="o">=</span><span class="n">Age</span><span class="p">(</span><span class="n">iso8601duration</span><span class="o">=</span><span class="s1">&#39;P1Y&#39;</span><span class="p">)</span>
+<span class="gp">... </span>  <span class="p">),</span>
+<span class="gp">... </span>  <span class="n">cause_of_death</span><span class="o">=</span><span class="n">OntologyClass</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;NCIT:C7541&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Retinoblastoma&#39;</span><span class="p">,</span>
+<span class="gp">... </span>  <span class="p">),</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We set the vital status to indicate that the proband died at 1 year of age due to <em>Retinoblastoma</em>.</p>
+<p>Now we can create a phenopacket. The phenopacket requires an identifier, <cite>MetaData</cite> and an optional subject.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span> <span class="o">=</span> <span class="n">Phenopacket</span><span class="p">(</span>
+<span class="gp">... </span>  <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;example.retinoblastoma.phenopacket.id&#39;</span><span class="p">,</span>
+<span class="gp">... </span>  <span class="n">meta_data</span><span class="o">=</span><span class="n">MetaData</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">created</span><span class="o">=</span><span class="n">Timestamp</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s1">&#39;2021-05-14T10:35:00Z&#39;</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">created_by</span><span class="o">=</span><span class="s1">&#39;anonymous biocurator&#39;</span><span class="p">,</span>
+<span class="gp">... </span>  <span class="p">),</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To create a phenopacket, we must provide the  <cite>id</cite> and <cite>meta_data</cite> fields
+since they are required by the Phenopacket Schema.
+The same applies to <cite>created</cite> and <cite>created_by</cite> fields of <cite>MetaData</cite>.</p>
+<p><cite>MetaData</cite> contextualizes the used ontology classes, such as <cite>NCIT:C7541</cite> <em>Retinoblastoma</em>,
+to a particular ontology, such as NCI Thesaurus. We can store the ontology resource in <cite>MetaData.resources</cite>
+field:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">meta_data</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<span class="gp">... </span>  <span class="n">Resource</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;ncit&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;NCI Thesaurus&#39;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://purl.obolibrary.org/obo/ncit.owl&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;23.09d&#39;</span><span class="p">,</span> <span class="n">namespace_prefix</span><span class="o">=</span><span class="s1">&#39;NCIT&#39;</span><span class="p">,</span> <span class="n">iri_prefix</span><span class="o">=</span><span class="s1">&#39;http://purl.obolibrary.org/obo/NCIT_&#39;</span><span class="p">,</span>
+<span class="gp">... </span>  <span class="p">),</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>All repeated elements, such as <cite>MetaData.resources</cite>, can be accessed via a <cite>list</cite>.</p>
+</section>
+<section id="read-write-json-and-protobuf">
+<h2>Read/write JSON and Protobuf<a class="headerlink" href="#read-write-json-and-protobuf" title="Link to this heading"></a></h2>
+<p>We can read and write phenopackets in JSON format using the <cite>JsonDeserializer</cite> and <cite>JsonSerializer</cite> classes:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ppsc.parse.json</span> <span class="kn">import</span> <span class="n">JsonSerializer</span><span class="p">,</span> <span class="n">JsonDeserializer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">serializer</span> <span class="o">=</span> <span class="n">JsonSerializer</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The serializer can write a Phenopacket Schema building block, such as <cite>OntologyClass</cite> or <cite>Phenopacket</cite> into
+a file handle:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">buf</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">serializer</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">subject</span><span class="o">.</span><span class="n">vital_status</span><span class="p">,</span> <span class="n">buf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">buf</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+<span class="go">&#39;{&quot;status&quot;: &quot;DECEASED&quot;, &quot;timeOfDeath&quot;: {&quot;age&quot;: {&quot;iso8601duration&quot;: &quot;P1Y&quot;}}, &quot;causeOfDeath&quot;: {&quot;id&quot;: &quot;NCIT:C7541&quot;, &quot;label&quot;: &quot;Retinoblastoma&quot;}}&#39;</span>
+</pre></div>
+</div>
+<p>and the JSON can be read back from a file handle:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">buf</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Rewind and ignore the result</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">deserializer</span> <span class="o">=</span> <span class="n">JsonDeserializer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">decoded</span> <span class="o">=</span> <span class="n">deserializer</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">VitalStatus</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">decoded</span> <span class="o">==</span> <span class="n">subject</span><span class="o">.</span><span class="n">vital_status</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>The building block can also be written into Protobuf wire format.
+We can do a similar round-trip as above, but we will need a byte IO handle:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">byte_buf</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>We can write the subject into the buffer and get the same data back:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">subject</span><span class="o">.</span><span class="n">dump_pb</span><span class="p">(</span><span class="n">byte_buf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">byte_buf</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Rewind to start</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">other</span> <span class="o">=</span> <span class="n">Individual</span><span class="o">.</span><span class="n">from_pb</span><span class="p">(</span><span class="n">byte_buf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subject</span> <span class="o">==</span> <span class="n">other</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="ppsc.Timestamp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ppsc.</span></span><span class="sig-name descname"><span class="pre">Timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nanos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppsc/_timestamp.html#Timestamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.Timestamp" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="ppsc.parse.html#ppsc.parse.ToProtobuf" title="ppsc.parse._pb.ToProtobuf"><code class="xref py py-class docutils literal notranslate"><span class="pre">ToProtobuf</span></code></a>, <a class="reference internal" href="ppsc.parse.html#ppsc.parse.FromProtobuf" title="ppsc.parse._pb.FromProtobuf"><code class="xref py py-class docutils literal notranslate"><span class="pre">FromProtobuf</span></code></a></p>
+<p>This <cite>Timestamp</cite> implementation is functionally equivalent to protobuf’s timestamp.</p>
+<p>Per protobuf API documentation, <em>A Timestamp represents a point in time
+independent of any time zone or local calendar, encoded as a count of seconds
+and fractions of seconds at nanosecond resolution.
+The count is relative to an epoch at UTC midnight on January 1, 1970,
+in the proleptic Gregorian calendar which extends the Gregorian calendar
+backwards to year one.</em></p>
+<p>Consult the <a class="reference external" href="https://phenopacket-schema.readthedocs.io/en/latest/timestamp.html">Phenopacket Schema</a> documentation
+for more information.</p>
+<p><strong>Examples</strong></p>
+<p>Here we show how to create a <cite>Timestamp</cite> from various inputs.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ppsc</span> <span class="kn">import</span> <span class="n">Timestamp</span>
+</pre></div>
+</div>
+<p>Let’s create a timestamp from a date time string:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">Timestamp</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s1">&#39;1970-01-01T00:00:30Z&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span><span class="o">.</span><span class="n">seconds</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">nanos</span>
+<span class="go">(30, 0)</span>
+</pre></div>
+</div>
+<p>Note, we indicate that the timestamp is in UTC by adding <cite>Z</cite> suffix.</p>
+<p>We can also create a timestamp from a local time.
+Let’s create the same <cite>Timestamp</cite> but now in Eastern Daylight Time (EDT)
+which is 4 hours behind UTC:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts_local</span> <span class="o">=</span> <span class="n">Timestamp</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s1">&#39;1969-12-31T20:00:30-04:00&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts_local</span> <span class="o">==</span> <span class="n">ts</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>We can also create timestamp from a datetime object:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">timezone</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">1970</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts_dt</span> <span class="o">=</span> <span class="n">Timestamp</span><span class="o">.</span><span class="n">from_datetime</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts_dt</span> <span class="o">==</span> <span class="n">ts</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Last, we can create timestamp directly from seconds and nanoseconds:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts_raw</span> <span class="o">=</span> <span class="n">Timestamp</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts_raw</span> <span class="o">==</span> <span class="n">ts</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>and we can convert the timestamp to a UTC date time string:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts_raw</span><span class="o">.</span><span class="n">as_str</span><span class="p">()</span>
+<span class="go">&#39;1970-01-01T00:00:30Z&#39;</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="ppsc.Timestamp.seconds">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">seconds</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#ppsc.Timestamp.seconds" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ppsc.Timestamp.nanos">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nanos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#ppsc.Timestamp.nanos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.Timestamp.as_datetime">
+<span class="sig-name descname"><span class="pre">as_datetime</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></span><a class="reference internal" href="../_modules/ppsc/_timestamp.html#Timestamp.as_datetime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.Timestamp.as_datetime" title="Link to this definition"></a></dt>
+<dd><p>Convert timestamp into Python’s datetime object.</p>
+<p>The datetime is always in UTC.</p>
+<p><strong>Example</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ppsc</span> <span class="kn">import</span> <span class="n">Timestamp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">Timestamp</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">as_datetime</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now we can access the datetime components:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">second</span>
+<span class="go">(1970, 1, 1, 0, 0, 10)</span>
+</pre></div>
+</div>
+<p>including the time zone:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">tzname</span><span class="p">()</span>
+<span class="go">&#39;UTC&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.Timestamp.as_str">
+<span class="sig-name descname"><span class="pre">as_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'%Y-%m-%dT%H:%M:%SZ'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/ppsc/_timestamp.html#Timestamp.as_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.Timestamp.as_str" title="Link to this definition"></a></dt>
+<dd><p>Convert timestamp into a date time string.</p>
+<p><strong>Example</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ppsc</span> <span class="kn">import</span> <span class="n">Timestamp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">Timestamp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500_000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span><span class="o">.</span><span class="n">as_str</span><span class="p">()</span>
+<span class="go">&#39;1970-01-01T00:00:00Z&#39;</span>
+</pre></div>
+</div>
+<p>We can use different formatting:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span><span class="o">.</span><span class="n">as_str</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S.</span><span class="si">%f</span><span class="s1">%Z&#39;</span><span class="p">)</span>
+<span class="go">&#39;1970-01-01T00:00:00.000500UTC&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.Timestamp.from_str">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'%Y-%m-%dT%H:%M:%S%z'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppsc/_timestamp.html#Timestamp.from_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.Timestamp.from_str" title="Link to this definition"></a></dt>
+<dd><p>Create <cite>Timestamp</cite> from a date time string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>val</strong> – the date time <cite>str</cite>.</p></li>
+<li><p><strong>fmt</strong> – the date time format string.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.Timestamp.from_datetime">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppsc/_timestamp.html#Timestamp.from_datetime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.Timestamp.from_datetime" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.Timestamp.to_message">
+<span class="sig-name descname"><span class="pre">to_message</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Message</span></span></span><a class="reference internal" href="../_modules/ppsc/_timestamp.html#Timestamp.to_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.Timestamp.to_message" title="Link to this definition"></a></dt>
+<dd><p>Get a protobuf representation of the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.Timestamp.message_type">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">message_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.12)"><span class="pre">Type</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Message</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/ppsc/_timestamp.html#Timestamp.message_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.Timestamp.message_type" title="Link to this definition"></a></dt>
+<dd><p>Get the type of the protobuf element that this class can be decoded from.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.Timestamp.from_message">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppsc/_timestamp.html#Timestamp.from_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.Timestamp.from_message" title="Link to this definition"></a></dt>
+<dd><p>Decode the message into a new instance of this class.</p>
+</dd></dl>
+
+</dd></dl>
+
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ppsc.parse.html">ppsc.parse package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.parse.html#ppsc.parse.Serializer"><code class="docutils literal notranslate"><span class="pre">Serializer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.parse.html#ppsc.parse.Serializable"><code class="docutils literal notranslate"><span class="pre">Serializable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.parse.html#ppsc.parse.Deserializer"><code class="docutils literal notranslate"><span class="pre">Deserializer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.parse.html#ppsc.parse.Deserializable"><code class="docutils literal notranslate"><span class="pre">Deserializable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.parse.html#ppsc.parse.FromProtobuf"><code class="docutils literal notranslate"><span class="pre">FromProtobuf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.parse.html#ppsc.parse.ToProtobuf"><code class="docutils literal notranslate"><span class="pre">ToProtobuf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.parse.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ppsc.v202.html">ppsc.v202 package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Phenopacket"><code class="docutils literal notranslate"><span class="pre">Phenopacket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Individual"><code class="docutils literal notranslate"><span class="pre">Individual</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.VitalStatus"><code class="docutils literal notranslate"><span class="pre">VitalStatus</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Sex"><code class="docutils literal notranslate"><span class="pre">Sex</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.KaryotypicSex"><code class="docutils literal notranslate"><span class="pre">KaryotypicSex</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.GeneDescriptor"><code class="docutils literal notranslate"><span class="pre">GeneDescriptor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.AcmgPathogenicityClassification"><code class="docutils literal notranslate"><span class="pre">AcmgPathogenicityClassification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.TherapeuticActionability"><code class="docutils literal notranslate"><span class="pre">TherapeuticActionability</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.VariantInterpretation"><code class="docutils literal notranslate"><span class="pre">VariantInterpretation</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.GenomicInterpretation"><code class="docutils literal notranslate"><span class="pre">GenomicInterpretation</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Diagnosis"><code class="docutils literal notranslate"><span class="pre">Diagnosis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Interpretation"><code class="docutils literal notranslate"><span class="pre">Interpretation</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.ReferenceRange"><code class="docutils literal notranslate"><span class="pre">ReferenceRange</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Quantity"><code class="docutils literal notranslate"><span class="pre">Quantity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.TypedQuantity"><code class="docutils literal notranslate"><span class="pre">TypedQuantity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.ComplexValue"><code class="docutils literal notranslate"><span class="pre">ComplexValue</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Value"><code class="docutils literal notranslate"><span class="pre">Value</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Measurement"><code class="docutils literal notranslate"><span class="pre">Measurement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.TherapeuticRegimen"><code class="docutils literal notranslate"><span class="pre">TherapeuticRegimen</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.RadiationTherapy"><code class="docutils literal notranslate"><span class="pre">RadiationTherapy</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.DrugType"><code class="docutils literal notranslate"><span class="pre">DrugType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.DoseInterval"><code class="docutils literal notranslate"><span class="pre">DoseInterval</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Treatment"><code class="docutils literal notranslate"><span class="pre">Treatment</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.MedicalAction"><code class="docutils literal notranslate"><span class="pre">MedicalAction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Expression"><code class="docutils literal notranslate"><span class="pre">Expression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Extension"><code class="docutils literal notranslate"><span class="pre">Extension</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.VcfRecord"><code class="docutils literal notranslate"><span class="pre">VcfRecord</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.MoleculeContext"><code class="docutils literal notranslate"><span class="pre">MoleculeContext</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.VariationDescriptor"><code class="docutils literal notranslate"><span class="pre">VariationDescriptor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.PhenotypicFeature"><code class="docutils literal notranslate"><span class="pre">PhenotypicFeature</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Disease"><code class="docutils literal notranslate"><span class="pre">Disease</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Biosample"><code class="docutils literal notranslate"><span class="pre">Biosample</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.MetaData"><code class="docutils literal notranslate"><span class="pre">MetaData</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Resource"><code class="docutils literal notranslate"><span class="pre">Resource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Update"><code class="docutils literal notranslate"><span class="pre">Update</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.OntologyClass"><code class="docutils literal notranslate"><span class="pre">OntologyClass</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.ExternalReference"><code class="docutils literal notranslate"><span class="pre">ExternalReference</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Evidence"><code class="docutils literal notranslate"><span class="pre">Evidence</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Procedure"><code class="docutils literal notranslate"><span class="pre">Procedure</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.GestationalAge"><code class="docutils literal notranslate"><span class="pre">GestationalAge</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Age"><code class="docutils literal notranslate"><span class="pre">Age</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.AgeRange"><code class="docutils literal notranslate"><span class="pre">AgeRange</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.TimeInterval"><code class="docutils literal notranslate"><span class="pre">TimeInterval</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.TimeElement"><code class="docutils literal notranslate"><span class="pre">TimeElement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Timestamp"><code class="docutils literal notranslate"><span class="pre">Timestamp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.File"><code class="docutils literal notranslate"><span class="pre">File</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Gene"><code class="docutils literal notranslate"><span class="pre">Gene</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Text"><code class="docutils literal notranslate"><span class="pre">Text</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Number"><code class="docutils literal notranslate"><span class="pre">Number</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.IndefiniteRange"><code class="docutils literal notranslate"><span class="pre">IndefiniteRange</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.DefiniteRange"><code class="docutils literal notranslate"><span class="pre">DefiniteRange</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.SimpleInterval"><code class="docutils literal notranslate"><span class="pre">SimpleInterval</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.SequenceInterval"><code class="docutils literal notranslate"><span class="pre">SequenceInterval</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.SequenceLocation"><code class="docutils literal notranslate"><span class="pre">SequenceLocation</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.SequenceState"><code class="docutils literal notranslate"><span class="pre">SequenceState</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.LiteralSequenceExpression"><code class="docutils literal notranslate"><span class="pre">LiteralSequenceExpression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.DerivedSequenceExpression"><code class="docutils literal notranslate"><span class="pre">DerivedSequenceExpression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.RepeatedSequenceExpression"><code class="docutils literal notranslate"><span class="pre">RepeatedSequenceExpression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.CytobandInterval"><code class="docutils literal notranslate"><span class="pre">CytobandInterval</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.ChromosomeLocation"><code class="docutils literal notranslate"><span class="pre">ChromosomeLocation</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Allele"><code class="docutils literal notranslate"><span class="pre">Allele</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Haplotype"><code class="docutils literal notranslate"><span class="pre">Haplotype</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.CopyNumber"><code class="docutils literal notranslate"><span class="pre">CopyNumber</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.VariationSet"><code class="docutils literal notranslate"><span class="pre">VariationSet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.v202.html#ppsc.v202.Variation"><code class="docutils literal notranslate"><span class="pre">Variation</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="API reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ppsc.parse.html" class="btn btn-neutral float-right" title="ppsc.parse package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

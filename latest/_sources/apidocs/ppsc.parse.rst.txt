@@ -1,0 +1,15 @@
+ppsc.parse package
+==================
+
+.. automodule:: ppsc.parse
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 2
+
+   ppsc.parse.json

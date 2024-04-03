@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ppsc.parse package &mdash; ppsc 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/ppsc.css?v=a9fa5eb9" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=6dbb43f8"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ppsc.parse.json package" href="ppsc.parse.json.html" />
+    <link rel="prev" title="ppsc package" href="ppsc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ppsc
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation &amp; Tutorial</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Setup</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ppsc.html">ppsc package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ppsc.html#create-phenopacket-programatically">Create phenopacket programatically</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppsc.html#read-write-json-and-protobuf">Read/write JSON and Protobuf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppsc.html#ppsc.Timestamp"><code class="docutils literal notranslate"><span class="pre">Timestamp</span></code></a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="ppsc.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ppsc.parse package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ppsc.v202.html">ppsc.v202 package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ppsc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">API reference</a></li>
+          <li class="breadcrumb-item"><a href="ppsc.html">ppsc package</a></li>
+      <li class="breadcrumb-item active">ppsc.parse package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/apidocs/ppsc.parse.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ppsc.parse">
+<span id="ppsc-parse-package"></span><h1>ppsc.parse package<a class="headerlink" href="#module-ppsc.parse" title="Link to this heading"></a></h1>
+<p>A package to support the (de)serialization of phenopacket schema elements to/from various formats,
+such as JSON, YAML, and protobuf.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ppsc.parse.Serializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ppsc.parse.</span></span><span class="sig-name descname"><span class="pre">Serializer</span></span><a class="reference internal" href="../_modules/ppsc/parse/_io.html#Serializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.Serializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p><cite>Serializer</cite> serializes a <a class="reference internal" href="#ppsc.parse.Serializable" title="ppsc.parse.Serializable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Serializable</span></code></a> object into a format such as JSON, YAML, or others.</p>
+<p>The format depends on the serializer subclass.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.parse.Serializer.serialize">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ppsc.parse.Serializable" title="ppsc.parse._io.Serializable"><span class="pre">Serializable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.IO" title="(in Python v3.12)"><span class="pre">IO</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppsc/parse/_io.html#Serializer.serialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.Serializer.serialize" title="Link to this definition"></a></dt>
+<dd><p>Serialize a value <cite>val</cite> into the provided IO object <cite>fp</cite>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ppsc.parse.Serializable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ppsc.parse.</span></span><span class="sig-name descname"><span class="pre">Serializable</span></span><a class="reference internal" href="../_modules/ppsc/parse/_io.html#Serializable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.Serializable" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p><cite>Serializable</cite> is a mixin class for data classes composed of a hierarchy of primitive types, such as <cite>bool</cite>, <cite>int</cite>,
+<cite>float</cite>, or <cite>str</cite>, or other <cite>Serializable</cite> objects.</p>
+<p><cite>Serializable</cite> knows how to convert the data into a hierarchy composed of primitive types
+or Python compound types such as <cite>list</cite> and <cite>dict</cite>. The hierarchy is an intermediate step before serializing
+into a data format such as JSON, YAML or others using a :class:Serializer`.</p>
+<p>The mixin requirements include a single method: <a class="reference internal" href="#ppsc.parse.Serializable.field_names" title="ppsc.parse.Serializable.field_names"><code class="xref py py-func docutils literal notranslate"><span class="pre">field_names()</span></code></a> and the other functionality then comes for free.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.parse.Serializable.field_names">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">field_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.12)"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/ppsc/parse/_io.html#Serializable.field_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.Serializable.field_names" title="Link to this definition"></a></dt>
+<dd><p>Get an iterable with the data class field names.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.parse.Serializable.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.MutableMapping" title="(in Python v3.12)"><span class="pre">MutableMapping</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppsc/parse/_io.html#Serializable.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.Serializable.to_dict" title="Link to this definition"></a></dt>
+<dd><p>Write itself into a dictionary composed of primitive or Python compound types.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ppsc.parse.Deserializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ppsc.parse.</span></span><span class="sig-name descname"><span class="pre">Deserializer</span></span><a class="reference internal" href="../_modules/ppsc/parse/_io.html#Deserializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.Deserializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p><cite>Deserializer</cite> decodes a <a class="reference internal" href="#ppsc.parse.Deserializable" title="ppsc.parse.Deserializable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Deserializable</span></code></a> class from a <cite>str</cite> or text IO handle.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.parse.Deserializer.deserialize">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/io.html#io.TextIOBase" title="(in Python v3.12)"><span class="pre">TextIOBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">clz</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.12)"><span class="pre">Type</span></a><span class="p"><span class="pre">[</span></span><span class="pre">D</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">D</span></span></span><a class="reference internal" href="../_modules/ppsc/parse/_io.html#Deserializer.deserialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.Deserializer.deserialize" title="Link to this definition"></a></dt>
+<dd><p>Decode an instance of deserializable class from the input <cite>fp</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fp</strong> – input to decode either as a <cite>str</cite> or a text IO handle.</p></li>
+<li><p><strong>clz</strong> – type of the class to be created from the input.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a new instance of <cite>D</cite> with attributes set based on the <cite>fp</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ppsc.parse.Deserializable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ppsc.parse.</span></span><span class="sig-name descname"><span class="pre">Deserializable</span></span><a class="reference internal" href="../_modules/ppsc/parse/_io.html#Deserializable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.Deserializable" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p><cite>Deserializable</cite> knows how to initialize itself
+based on a <cite>dict</cite> with intermediate Python representation.</p>
+<p>See <a class="reference internal" href="#ppsc.parse.Serializable" title="ppsc.parse.Serializable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Serializable</span></code></a> for more info.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.parse.Deserializable.from_dict">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Mapping" title="(in Python v3.12)"><span class="pre">Mapping</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppsc/parse/_io.html#Deserializable.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.Deserializable.from_dict" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.parse.Deserializable.required_fields">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">required_fields</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.12)"><span class="pre">Sequence</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/ppsc/parse/_io.html#Deserializable.required_fields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.Deserializable.required_fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ppsc.parse.FromProtobuf">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ppsc.parse.</span></span><span class="sig-name descname"><span class="pre">FromProtobuf</span></span><a class="reference internal" href="../_modules/ppsc/parse/_pb.html#FromProtobuf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.FromProtobuf" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A mixin for data classes/types that can be created from some protobuf bytes.</p>
+<p>In general, the deserialization first constructs an intermediate Protobuf <code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code>. The message is then
+mapped into the actual class.</p>
+<p><strong>Example</strong></p>
+<p>Let’s load example protobuf file at the following location:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath_pb</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;tests&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;pp&#39;</span><span class="p">,</span> <span class="s1">&#39;retinoblastoma.pb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The file contains a v2.0.2 phenopacket. Let’s import the <cite>Phenopacket</cite> class and load the file:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ppsc.v202</span> <span class="kn">import</span> <span class="n">Phenopacket</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath_pb</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+<span class="gp">... </span>  <span class="n">pp</span> <span class="o">=</span> <span class="n">Phenopacket</span><span class="o">.</span><span class="n">from_pb</span><span class="p">(</span><span class="n">fh</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we have a phenopacket that we can work with:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">id</span>
+<span class="go">&#39;example.retinoblastoma.phenopacket.id&#39;</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.parse.FromProtobuf.message_type">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">message_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.12)"><span class="pre">Type</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Message</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/ppsc/parse/_pb.html#FromProtobuf.message_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.FromProtobuf.message_type" title="Link to this definition"></a></dt>
+<dd><p>Get the type of the protobuf element that this class can be decoded from.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.parse.FromProtobuf.from_message">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppsc/parse/_pb.html#FromProtobuf.from_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.FromProtobuf.from_message" title="Link to this definition"></a></dt>
+<dd><p>Decode the message into a new instance of this class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.parse.FromProtobuf.from_pb">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_pb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(in Python v3.12)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppsc/parse/_pb.html#FromProtobuf.from_pb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.FromProtobuf.from_pb" title="Link to this definition"></a></dt>
+<dd><p>Create an instance from some bytes read from <cite>pb</cite>.
+The bytes are expected to correspond to the state of the message.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.parse.FromProtobuf.complain_about_incompatible_msg_type">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">complain_about_incompatible_msg_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppsc/parse/_pb.html#FromProtobuf.complain_about_incompatible_msg_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.FromProtobuf.complain_about_incompatible_msg_type" title="Link to this definition"></a></dt>
+<dd><p>A utility method for user-friendly complaint regarding attempting to decode from incompatible type.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ppsc.parse.ToProtobuf">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ppsc.parse.</span></span><span class="sig-name descname"><span class="pre">ToProtobuf</span></span><a class="reference internal" href="../_modules/ppsc/parse/_pb.html#ToProtobuf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.ToProtobuf" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A mixin for data classes that can encode themselves into some protobuf bytes.</p>
+<p><strong>Example</strong></p>
+<p>Let’s create an example subject:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ppsc.v202</span> <span class="kn">import</span> <span class="n">Individual</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">Individual</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;example.id&#39;</span><span class="p">,</span> <span class="n">alternate_ids</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;other&#39;</span><span class="p">,</span> <span class="s1">&#39;identifiers&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Now we can serialize the individual into a file or, for the purpose of this test, into <a class="reference external" href="https://docs.python.org/3/library/io.html#io.BytesIO" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.BytesIO</span></code></a> buffer:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">io</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">buf</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="o">.</span><span class="n">dump_pb</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">buf</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+<span class="go">b&#39;\n\nexample.id\x12\x05other\x12\x0bidentifiers&#39;</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.parse.ToProtobuf.to_message">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_message</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Message</span></span></span><a class="reference internal" href="../_modules/ppsc/parse/_pb.html#ToProtobuf.to_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.ToProtobuf.to_message" title="Link to this definition"></a></dt>
+<dd><p>Get a protobuf representation of the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppsc.parse.ToProtobuf.dump_pb">
+<span class="sig-name descname"><span class="pre">dump_pb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.BinaryIO" title="(in Python v3.12)"><span class="pre">BinaryIO</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppsc/parse/_pb.html#ToProtobuf.dump_pb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppsc.parse.ToProtobuf.dump_pb" title="Link to this definition"></a></dt>
+<dd><p>Write the protobuf representation of the class into the provided <cite>fp</cite> byte handle.</p>
+</dd></dl>
+
+</dd></dl>
+
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ppsc.parse.json.html">ppsc.parse.json package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.parse.json.html#ppsc.parse.json.JsonSerializer"><code class="docutils literal notranslate"><span class="pre">JsonSerializer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppsc.parse.json.html#ppsc.parse.json.JsonDeserializer"><code class="docutils literal notranslate"><span class="pre">JsonDeserializer</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ppsc.html" class="btn btn-neutral float-left" title="ppsc package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ppsc.parse.json.html" class="btn btn-neutral float-right" title="ppsc.parse.json package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

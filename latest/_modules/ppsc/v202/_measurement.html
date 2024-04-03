@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ppsc.v202._measurement &mdash; ppsc 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/ppsc.css?v=a9fa5eb9" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=6dbb43f8"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ppsc
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation &amp; Tutorial</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../apidocs/modules.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ppsc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ppsc.v202._measurement</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ppsc.v202._measurement</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">import</span> <span class="nn">phenopackets</span> <span class="k">as</span> <span class="nn">pp202</span>
+<span class="kn">from</span> <span class="nn">google.protobuf.message</span> <span class="kn">import</span> <span class="n">Message</span>
+
+<span class="kn">from</span> <span class="nn">.._api</span> <span class="kn">import</span> <span class="n">MessageMixin</span>
+<span class="kn">from</span> <span class="nn">._base</span> <span class="kn">import</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">Procedure</span><span class="p">,</span> <span class="n">TimeElement</span>
+<span class="kn">from</span> <span class="nn">..parse</span> <span class="kn">import</span> <span class="n">extract_message_scalar</span><span class="p">,</span> <span class="n">extract_message_sequence</span><span class="p">,</span> <span class="n">extract_oneof_scalar</span>
+<span class="kn">from</span> <span class="nn">..parse</span> <span class="kn">import</span> <span class="n">extract_pb_message_scalar</span><span class="p">,</span> <span class="n">extract_pb_message_seq</span><span class="p">,</span> <span class="n">extract_pb_oneof_scalar</span>
+
+
+<div class="viewcode-block" id="ReferenceRange">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.ReferenceRange">[docs]</a>
+<span class="k">class</span> <span class="nc">ReferenceRange</span><span class="p">(</span><span class="n">MessageMixin</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">unit</span><span class="p">:</span> <span class="n">OntologyClass</span><span class="p">,</span>
+            <span class="n">low</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="n">high</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_unit</span> <span class="o">=</span> <span class="n">unit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_low</span> <span class="o">=</span> <span class="n">low</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_high</span> <span class="o">=</span> <span class="n">high</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">unit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OntologyClass</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unit</span>
+
+    <span class="nd">@unit</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">OntologyClass</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_unit</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">low</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_low</span>
+
+    <span class="nd">@low</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">low</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_low</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">high</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_high</span>
+
+    <span class="nd">@high</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">high</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_high</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="ReferenceRange.field_names">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.ReferenceRange.field_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">field_names</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span></div>
+
+
+<div class="viewcode-block" id="ReferenceRange.required_fields">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.ReferenceRange.required_fields">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">required_fields</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span></div>
+
+
+<div class="viewcode-block" id="ReferenceRange.from_dict">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.ReferenceRange.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_all_required_fields_are_present</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ReferenceRange</span><span class="p">(</span>
+                <span class="n">unit</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">low</span><span class="o">=</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">],</span>
+                <span class="n">high</span><span class="o">=</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;high&#39;</span><span class="p">],</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_complain_about_missing_field</span><span class="p">(</span><span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ReferenceRange.to_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.ReferenceRange.to_message">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">ReferenceRange</span><span class="p">(</span>
+            <span class="n">unit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="o">.</span><span class="n">to_message</span><span class="p">(),</span>
+            <span class="n">low</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_low</span><span class="p">,</span>
+            <span class="n">high</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_high</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ReferenceRange.message_type">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.ReferenceRange.message_type">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">message_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">ReferenceRange</span></div>
+
+
+<div class="viewcode-block" id="ReferenceRange.from_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.ReferenceRange.from_message">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">message_type</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="n">ReferenceRange</span><span class="p">(</span>
+                <span class="n">unit</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+                <span class="n">low</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">low</span><span class="p">,</span>
+                <span class="n">high</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">high</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">complain_about_incompatible_msg_type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ReferenceRange</span><span class="p">)</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unit</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_unit</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_low</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_low</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_high</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_high</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;ReferenceRange(unit=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="si">}</span><span class="s1">, low=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_low</span><span class="si">}</span><span class="s1">, high=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_high</span><span class="si">}</span><span class="s1">)&#39;</span></div>
+
+
+
+<div class="viewcode-block" id="Quantity">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Quantity">[docs]</a>
+<span class="k">class</span> <span class="nc">Quantity</span><span class="p">(</span><span class="n">MessageMixin</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">unit</span><span class="p">:</span> <span class="n">OntologyClass</span><span class="p">,</span>
+            <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="n">reference_range</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">ReferenceRange</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_unit</span> <span class="o">=</span> <span class="n">unit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reference_range</span> <span class="o">=</span> <span class="n">reference_range</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">unit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OntologyClass</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unit</span>
+
+    <span class="nd">@unit</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">OntologyClass</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_unit</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span>
+
+    <span class="nd">@value</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">reference_range</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">ReferenceRange</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reference_range</span>
+
+    <span class="nd">@reference_range</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">reference_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">ReferenceRange</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reference_range</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@reference_range</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">reference_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reference_range</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Quantity.field_names">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Quantity.field_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">field_names</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;reference_range&#39;</span></div>
+
+
+<div class="viewcode-block" id="Quantity.required_fields">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Quantity.required_fields">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">required_fields</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span></div>
+
+
+<div class="viewcode-block" id="Quantity.from_dict">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Quantity.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_all_required_fields_are_present</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Quantity</span><span class="p">(</span>
+                <span class="n">unit</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">],</span>
+                <span class="n">reference_range</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;reference_range&#39;</span><span class="p">,</span> <span class="n">ReferenceRange</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_complain_about_missing_field</span><span class="p">(</span><span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Quantity.message_type">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Quantity.message_type">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">message_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Quantity</span></div>
+
+
+<div class="viewcode-block" id="Quantity.from_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Quantity.from_message">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">message_type</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="n">Quantity</span><span class="p">(</span>
+                <span class="n">unit</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">msg</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                <span class="n">reference_range</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;reference_range&#39;</span><span class="p">,</span> <span class="n">ReferenceRange</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">complain_about_incompatible_msg_type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Quantity.to_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Quantity.to_message">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span><span class="p">:</span>
+        <span class="n">quantity</span> <span class="o">=</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="o">.</span><span class="n">to_message</span><span class="p">(),</span> <span class="n">value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reference_range</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">quantity</span><span class="o">.</span><span class="n">reference_range</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_reference_range</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">quantity</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">)</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unit</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_unit</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_value</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reference_range</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_reference_range</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Quantity(unit=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="si">}</span><span class="s1">, value=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="si">}</span><span class="s1">, reference_range=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_reference_range</span><span class="si">}</span><span class="s1">)&#39;</span></div>
+
+
+
+<div class="viewcode-block" id="TypedQuantity">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.TypedQuantity">[docs]</a>
+<span class="k">class</span> <span class="nc">TypedQuantity</span><span class="p">(</span><span class="n">MessageMixin</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="nb">type</span><span class="p">:</span> <span class="n">OntologyClass</span><span class="p">,</span>
+            <span class="n">quantity</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="nb">type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_quantity</span> <span class="o">=</span> <span class="n">quantity</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OntologyClass</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span>
+
+    <span class="nd">@type</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">OntologyClass</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">quantity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Quantity</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quantity</span>
+
+    <span class="nd">@quantity</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">quantity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_quantity</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="TypedQuantity.field_names">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.TypedQuantity.field_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">field_names</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;quantity&#39;</span></div>
+
+
+<div class="viewcode-block" id="TypedQuantity.required_fields">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.TypedQuantity.required_fields">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">required_fields</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;quantity&#39;</span></div>
+
+
+<div class="viewcode-block" id="TypedQuantity.from_dict">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.TypedQuantity.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_all_required_fields_are_present</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">TypedQuantity</span><span class="p">(</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">quantity</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;quantity&#39;</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_complain_about_missing_field</span><span class="p">(</span><span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TypedQuantity.to_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.TypedQuantity.to_message">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">TypedQuantity</span><span class="p">(</span>
+            <span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="o">.</span><span class="n">to_message</span><span class="p">(),</span>
+            <span class="n">quantity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_quantity</span><span class="o">.</span><span class="n">to_message</span><span class="p">(),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TypedQuantity.message_type">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.TypedQuantity.message_type">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">message_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">TypedQuantity</span></div>
+
+
+<div class="viewcode-block" id="TypedQuantity.from_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.TypedQuantity.from_message">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">message_type</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="n">TypedQuantity</span><span class="p">(</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+                <span class="n">quantity</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;quantity&#39;</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">complain_about_incompatible_msg_type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">TypedQuantity</span><span class="p">)</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_type</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quantity</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_quantity</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;TypedQuantity(type=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="si">}</span><span class="s1">, quantity=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_quantity</span><span class="si">}</span><span class="s1">)&#39;</span></div>
+
+
+
+<div class="viewcode-block" id="ComplexValue">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.ComplexValue">[docs]</a>
+<span class="k">class</span> <span class="nc">ComplexValue</span><span class="p">(</span><span class="n">MessageMixin</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">typed_quantities</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">TypedQuantity</span><span class="p">],</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_typed_quantities</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">typed_quantities</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_typed_quantities</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;At least 1 typed quantity must be present!&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">typed_quantities</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">MutableSequence</span><span class="p">[</span><span class="n">TypedQuantity</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_typed_quantities</span>
+
+<div class="viewcode-block" id="ComplexValue.field_names">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.ComplexValue.field_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">field_names</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;typed_quantities&#39;</span><span class="p">,</span></div>
+
+
+<div class="viewcode-block" id="ComplexValue.required_fields">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.ComplexValue.required_fields">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">required_fields</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;typed_quantities&#39;</span><span class="p">,</span></div>
+
+
+<div class="viewcode-block" id="ComplexValue.from_dict">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.ComplexValue.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_all_required_fields_are_present</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ComplexValue</span><span class="p">(</span>
+                <span class="n">typed_quantities</span><span class="o">=</span><span class="n">extract_message_sequence</span><span class="p">(</span><span class="s1">&#39;typed_quantities&#39;</span><span class="p">,</span> <span class="n">TypedQuantity</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_complain_about_missing_field</span><span class="p">(</span><span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ComplexValue.message_type">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.ComplexValue.message_type">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">message_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">ComplexValue</span></div>
+
+
+<div class="viewcode-block" id="ComplexValue.from_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.ComplexValue.from_message">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">message_type</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="n">ComplexValue</span><span class="p">(</span>
+                <span class="n">typed_quantities</span><span class="o">=</span><span class="n">extract_pb_message_seq</span><span class="p">(</span><span class="s1">&#39;typed_quantities&#39;</span><span class="p">,</span> <span class="n">TypedQuantity</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">complain_about_incompatible_msg_type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ComplexValue.to_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.ComplexValue.to_message">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span><span class="p">:</span>
+        <span class="n">cv</span> <span class="o">=</span> <span class="n">pp202</span><span class="o">.</span><span class="n">ComplexValue</span><span class="p">()</span>
+        <span class="n">cv</span><span class="o">.</span><span class="n">typed_quantities</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">to_message</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_typed_quantities</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cv</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ComplexValue</span><span class="p">)</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_typed_quantities</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_typed_quantities</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;ComplexValue(typed_quantities=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_typed_quantities</span><span class="si">}</span><span class="s1">)&#39;</span></div>
+
+
+
+<div class="viewcode-block" id="Value">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Value">[docs]</a>
+<span class="k">class</span> <span class="nc">Value</span><span class="p">(</span><span class="n">MessageMixin</span><span class="p">):</span>
+    <span class="n">_ONEOF_VALUE</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;quantity&#39;</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">,</span> <span class="s1">&#39;ontology_class&#39;</span><span class="p">:</span> <span class="n">OntologyClass</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">],</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">quantity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Quantity</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="nd">@quantity</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">quantity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Quantity</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ontology_class</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">OntologyClass</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="nd">@ontology_class</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">ontology_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">OntologyClass</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="Value.field_names">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Value.field_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">field_names</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;quantity&#39;</span><span class="p">,</span> <span class="s1">&#39;ontology_class&#39;</span></div>
+
+
+<div class="viewcode-block" id="Value.required_fields">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Value.required_fields">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">required_fields</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Should not be called!&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Value.from_dict">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Value.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">field</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_ONEOF_VALUE</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Value</span><span class="p">(</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">extract_oneof_scalar</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_ONEOF_VALUE</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Missing one of required fields: `quantity|ontology_class`: </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Value.to_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Value.to_message">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span><span class="p">:</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Value</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">):</span>
+            <span class="n">v</span><span class="o">.</span><span class="n">quantity</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">):</span>
+            <span class="n">v</span><span class="o">.</span><span class="n">ontology_class</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Bug&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">v</span></div>
+
+
+<div class="viewcode-block" id="Value.message_type">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Value.message_type">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">message_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Value</span></div>
+
+
+<div class="viewcode-block" id="Value.from_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Value.from_message">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">message_type</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="n">Value</span><span class="p">(</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">extract_pb_oneof_scalar</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_ONEOF_VALUE</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">complain_about_incompatible_msg_type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Value</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_value</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Value(value=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="si">}</span><span class="s1">)&#39;</span></div>
+
+
+
+<div class="viewcode-block" id="Measurement">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Measurement">[docs]</a>
+<span class="k">class</span> <span class="nc">Measurement</span><span class="p">(</span><span class="n">MessageMixin</span><span class="p">):</span>
+    <span class="n">_ONEOF_MEASUREMENT_VALUE</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">Value</span><span class="p">,</span> <span class="s1">&#39;complex_value&#39;</span><span class="p">:</span> <span class="n">ComplexValue</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">assay</span><span class="p">:</span> <span class="n">OntologyClass</span><span class="p">,</span>
+            <span class="n">measurement_value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">Value</span><span class="p">,</span> <span class="n">ComplexValue</span><span class="p">],</span>
+            <span class="n">description</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">time_observed</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">TimeElement</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">procedure</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Procedure</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_assay</span> <span class="o">=</span> <span class="n">assay</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_measurement_value</span> <span class="o">=</span> <span class="n">measurement_value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time_observed</span> <span class="o">=</span> <span class="n">time_observed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_procedure</span> <span class="o">=</span> <span class="n">procedure</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">assay</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OntologyClass</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_assay</span>
+
+    <span class="nd">@assay</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">assay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">OntologyClass</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_assay</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">measurement_value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">Value</span><span class="p">,</span> <span class="n">ComplexValue</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_measurement_value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Value</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_measurement_value</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_measurement_value</span><span class="p">,</span> <span class="n">Value</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">complex_value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">ComplexValue</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_measurement_value</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_measurement_value</span><span class="p">,</span> <span class="n">ComplexValue</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span>
+
+    <span class="nd">@description</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@description</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">time_observed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">TimeElement</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_observed</span>
+
+    <span class="nd">@time_observed</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">time_observed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">TimeElement</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time_observed</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@time_observed</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">time_observed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time_observed</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">procedure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Procedure</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_procedure</span>
+
+    <span class="nd">@procedure</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">procedure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Procedure</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_procedure</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@procedure</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">procedure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_procedure</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Measurement.field_names">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Measurement.field_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">field_names</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s1">&#39;assay&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;complex_value&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;time_observed&#39;</span><span class="p">,</span> <span class="s1">&#39;procedure&#39;</span></div>
+
+
+<div class="viewcode-block" id="Measurement.required_fields">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Measurement.required_fields">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">required_fields</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Should not be called!&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Measurement.from_dict">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Measurement.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="s1">&#39;assay&#39;</span> <span class="ow">in</span> <span class="n">values</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">field</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_ONEOF_MEASUREMENT_VALUE</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Measurement</span><span class="p">(</span>
+                <span class="n">assay</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;assay&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">measurement_value</span><span class="o">=</span><span class="n">extract_oneof_scalar</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_ONEOF_MEASUREMENT_VALUE</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">description</span><span class="o">=</span><span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                <span class="n">time_observed</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;time_observed&#39;</span><span class="p">,</span> <span class="n">TimeElement</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+                <span class="n">procedure</span><span class="o">=</span><span class="n">extract_message_scalar</span><span class="p">(</span><span class="s1">&#39;procedure&#39;</span><span class="p">,</span> <span class="n">Procedure</span><span class="p">,</span> <span class="n">values</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Missing one of required fields: `assay, value|complex_value` </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Measurement.to_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Measurement.to_message">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Message</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Measurement</span><span class="p">(</span>
+            <span class="n">assay</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_assay</span><span class="o">.</span><span class="n">to_message</span><span class="p">(),</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_measurement_value</span><span class="p">,</span> <span class="n">Value</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_measurement_value</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_measurement_value</span><span class="p">,</span> <span class="n">ComplexValue</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">complex_value</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_measurement_value</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Bug&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_observed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">time_observed</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_observed</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_procedure</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">procedure</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_procedure</span><span class="o">.</span><span class="n">to_message</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">m</span></div>
+
+
+<div class="viewcode-block" id="Measurement.message_type">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Measurement.message_type">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">message_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">Message</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">pp202</span><span class="o">.</span><span class="n">Measurement</span></div>
+
+
+<div class="viewcode-block" id="Measurement.from_message">
+<a class="viewcode-back" href="../../../apidocs/ppsc.v202.html#ppsc.v202.Measurement.from_message">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_message</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">message_type</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="n">Measurement</span><span class="p">(</span>
+                <span class="n">assay</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;assay&#39;</span><span class="p">,</span> <span class="n">OntologyClass</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+                <span class="n">measurement_value</span><span class="o">=</span><span class="n">extract_pb_oneof_scalar</span><span class="p">(</span>
+                    <span class="s1">&#39;measurement_value&#39;</span><span class="p">,</span>
+                    <span class="bp">cls</span><span class="o">.</span><span class="n">_ONEOF_MEASUREMENT_VALUE</span><span class="p">,</span>
+                    <span class="n">msg</span><span class="p">),</span>
+                <span class="n">description</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">description</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="k">else</span> <span class="n">msg</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+                <span class="n">time_observed</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;time_observed&#39;</span><span class="p">,</span> <span class="n">TimeElement</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+                <span class="n">procedure</span><span class="o">=</span><span class="n">extract_pb_message_scalar</span><span class="p">(</span><span class="s1">&#39;procedure&#39;</span><span class="p">,</span> <span class="n">Procedure</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">complain_about_incompatible_msg_type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Measurement</span><span class="p">)</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_assay</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_assay</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_measurement_value</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_measurement_value</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_description</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_observed</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_time_observed</span> \
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_procedure</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_procedure</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Measurement(&#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;assay=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_assay</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;measurement_value=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_measurement_value</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;description=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_description</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;time_observed=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_observed</span><span class="si">}</span><span class="s1">, &#39;</span> \
+               <span class="sa">f</span><span class="s1">&#39;procedure=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_procedure</span><span class="si">}</span><span class="s1">)&#39;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
